@@ -10,49 +10,24 @@ import { StatusBar, StyleSheet, useColorScheme, View, Text } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import HomeScreen from './src/screens/HomeScreen';
-// import TodoScreen from './src/screens/TodoScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import TodoScreen from './src/screens/TodoScreen';
+import AddScreen from './src/screens/AddScreen';
+import DetailsTaskScreen from './src/screens/DetailsTaskScreen';
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
-function TodoScreen() {
-  return (
-    <Text> Todo Screen</Text>
-  )
-}
-
-const RootStack = createNativeStackNavigator({
-  initialRouteName: 'Home',
-  screenOptions: {
-    headerStyle: {
-      backgroundColor:'tomato',
-    },
-  },
-  screens: {
-    Home: {
-      screen: HomeScreen,
-      options:{
-        title:'overview'
-      },
-    },
-    Todo: TodoScreen,
-  },
-});
-
-const Navigation = createStaticNavigation(RootStack);
-
-
+const Stack = createNativeStackNavigator();
 
 function App() {
   
   return (
-    <Navigation />
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Todo">
+        {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
+        <Stack.Screen name="Todo" component={TodoScreen} />
+        <Stack.Screen name="Add" component={AddScreen} />
+        <Stack.Screen name="DetailsTask" component={DetailsTaskScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

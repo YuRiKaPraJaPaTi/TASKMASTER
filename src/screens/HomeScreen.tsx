@@ -4,12 +4,12 @@ import React from 'react'
 
 const HomeScreen = ({navigation}) => {
   return (
-    <View>
-      <Text>HomeScreen</Text>
+    <View style={styles.container}>
+      <Text>Welcome</Text>
       <Button
-      title="Go to Todo"
+      title="Lets Go"
       onPress={() =>
-        navigation.navigate('Todo', {name: 'Jane'})
+        navigation.navigate('Todo')
       }
     />
     </View>
@@ -18,4 +18,6 @@ const HomeScreen = ({navigation}) => {
 
 export default HomeScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+      
+})
