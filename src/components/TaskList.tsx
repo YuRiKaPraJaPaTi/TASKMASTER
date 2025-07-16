@@ -6,10 +6,9 @@ import TaskItem from './TaskItem'
 type TaskListProps = {
       tasks: Task[];
       onPressDetails: (task:Task) => void;
-      onDelete: (id: number) => void;
 }
 
-const TaskList = ({tasks, onPressDetails, onDelete}:TaskListProps) => {
+const TaskList = ({tasks, onPressDetails}:TaskListProps) => {
   return (
     <View>
             <FlatList
@@ -17,7 +16,7 @@ const TaskList = ({tasks, onPressDetails, onDelete}:TaskListProps) => {
                   keyExtractor={item => item.id.toString()}
                   renderItem={({ item }) => (
                   <TaskItem task={item} onPressDetails={()=>onPressDetails(item)}
-                  onDelete={onDelete}/>
+                  />
                   
                   )}
             />

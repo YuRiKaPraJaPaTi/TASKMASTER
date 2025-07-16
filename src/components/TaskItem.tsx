@@ -2,14 +2,22 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Task } from '../navigation/types'
 import SocialIcon from './SocialIcon'
+import { useAppDispatch } from '../redux/hooks';
+import { deleteTask } from '../redux/todoSlice';
 
 interface TaskItemProps {
       task: Task;
       onPressDetails?: ()=>void;
-      onDelete?: (id:number) => void;
+      
 }
 
-const TaskItem = ({task, onPressDetails, onDelete }:TaskItemProps) => {
+const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
+      const dispatch = useAppDispatch();
+
+      const handleDelete = (id: number) => {
+                  // setTasks(prev => prev.filter(task => task.id !== id));
+                  dispatch(deleteTask(id))
+            };
   return (
     <View style={styles.outerContainer}>
             <View style={styles.taskItem}>
@@ -31,7 +39,7 @@ const TaskItem = ({task, onPressDetails, onDelete }:TaskItemProps) => {
                         <SocialIcon 
                               source={require('../../assets/delete.png')}
                               size={22}
-                              onPress={()=>onDelete?.(task.id)}
+                              onPress={()=>handleDelete(task.id)}
                               
                         />
                   </View>

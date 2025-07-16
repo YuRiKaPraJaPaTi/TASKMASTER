@@ -5,12 +5,13 @@ import TaskList from '../components/TaskList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, Task } from '../navigation/types';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { deleteTask } from '../redux/todoSlice';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Todo'>;
 
 const TodoScreen = ({navigation, route}:Props) => {
       // const [tasks, setTasks] = useState<Task[]>([])
-      const dispatch = useAppDispatch();
+      // const dispatch = useAppDispatch();
       const tasks = useAppSelector(state => state.tasks.tasks)
 
 
@@ -27,13 +28,6 @@ const TodoScreen = ({navigation, route}:Props) => {
             navigation.navigate('DetailsTask', {task});
       };
 
-      const handleDelete = (id: number) => {
-            // setTasks(prev => prev.filter(task => task.id !== id));
-      };
-
-
-      
-
       return (
     <View style={styles.container}>
       <View style={styles.top}>
@@ -43,7 +37,7 @@ const TodoScreen = ({navigation, route}:Props) => {
             <View >
                   <Text style={styles.heading}>My Tasks</Text>
                   <TaskList tasks={tasks} onPressDetails={handleDetails} 
-                  onDelete={handleDelete}/>
+                  />
             </View>
             <TouchableOpacity
                   style={styles.fab}
