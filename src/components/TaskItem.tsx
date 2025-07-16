@@ -1,14 +1,15 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Task } from '../screens/TodoScreen'
+import { Task } from '../navigation/types'
 import SocialIcon from './SocialIcon'
 
 interface TaskItemProps {
       task: Task;
       onPressDetails?: ()=>void;
+      onDelete?: (id:number) => void;
 }
 
-const TaskItem = ({task, onPressDetails }:TaskItemProps) => {
+const TaskItem = ({task, onPressDetails, onDelete }:TaskItemProps) => {
   return (
     <View style={styles.outerContainer}>
             <View style={styles.taskItem}>
@@ -23,13 +24,14 @@ const TaskItem = ({task, onPressDetails }:TaskItemProps) => {
                   </View>
 
                   <View style={styles.iconContainer}>
-                        <SocialIcon 
+                        {/* <SocialIcon 
                               source={require('../../assets/edit.png')}
                               size={22}
-                        />
+                        /> */}
                         <SocialIcon 
                               source={require('../../assets/delete.png')}
                               size={22}
+                              onPress={()=>onDelete?.(task.id)}
                               
                         />
                   </View>

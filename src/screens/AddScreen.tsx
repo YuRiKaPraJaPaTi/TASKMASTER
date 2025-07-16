@@ -2,10 +2,13 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
 import MyTextInput from '../components/MyTextInput'
-import { Task } from './TodoScreen'
 import MyButton from '../components/MyButton'
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList, Task } from '../navigation/types';
 
-const AddScreen = ({navigation, route}) => {
+type Props = NativeStackScreenProps<RootStackParamList, 'Add'>;
+
+const AddScreen = ({navigation, route}:Props) => {
       const [title, setTitle] = useState('')
       const [description, setDescription] = useState('')
       const [date, setDate] = useState('') 

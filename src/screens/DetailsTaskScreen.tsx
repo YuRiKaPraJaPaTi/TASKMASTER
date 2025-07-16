@@ -1,7 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList, Task } from '../navigation/types';
 
-const DetailsTaskScreen = ({route}) => {
+type Props = NativeStackScreenProps<RootStackParamList, 'DetailsTask'>;
+
+const DetailsTaskScreen = ({route}:Props) => {
   const {task} = route.params;
   return (
     <View style={styles.container}>

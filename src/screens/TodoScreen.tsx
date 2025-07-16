@@ -2,22 +2,19 @@ import { StyleSheet, Text, TouchableOpacity, View, Image, FlatList, Button} from
 import React, { useEffect, useState } from 'react'
 import MyButton from '../components/MyButton';
 import TaskList from '../components/TaskList';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList, Task } from '../navigation/types';
 
-export type Task = {
-      id: number,
-      title: string,
-      description: string,
-      date: string,
-};
+type Props = NativeStackScreenProps<RootStackParamList, 'Todo'>;
 
-const TodoScreen = ({navigation, route}) => {
+const TodoScreen = ({navigation, route}:Props) => {
       const [tasks, setTasks] = useState<Task[]>([])
 
 
       const handleAdd = () => {
             navigation.navigate('Add', {
                   addTask: (newTask: Task) => {
-                  setTasks(prev => [...prev, newTask]);
+                  setTasks(prev => [newTask, ...prev]);
                   },
             });
       };
@@ -25,6 +22,11 @@ const TodoScreen = ({navigation, route}) => {
       const handleDetails = (task:Task) => {
             navigation.navigate('DetailsTask', {task});
       };
+
+      const handleDelete = (id: number) => {
+            setTasks(prev => prev.filter(task => task.id !== id));
+      };
+
 
       
 
@@ -36,7 +38,8 @@ const TodoScreen = ({navigation, route}) => {
       <View style={styles.bottom}>
             <View >
                   <Text style={styles.heading}>My Tasks</Text>
-                  <TaskList tasks={tasks} onPressDetails={handleDetails} />
+                  <TaskList tasks={tasks} onPressDetails={handleDetails} 
+                  onDelete={handleDelete}/>
             </View>
             <TouchableOpacity
                   style={styles.fab}
