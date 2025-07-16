@@ -3,7 +3,6 @@ import React from 'react'
 import { useState } from 'react'
 import MyTextInput from '../components/MyTextInput'
 import { Task } from './TodoScreen'
-import { Touchable } from 'react-native/types_generated/index'
 import MyButton from '../components/MyButton'
 
 const AddScreen = ({navigation, route}) => {

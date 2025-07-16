@@ -4,7 +4,7 @@ import React from 'react'
 
 const HomeScreen = ({navigation}) => {
   return (
-    <View style={styles.container}>
+    <View >
       <Text>Welcome</Text>
       <Button
       title="Lets Go"

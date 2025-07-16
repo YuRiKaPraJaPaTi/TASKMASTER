@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, FlatList, Button} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import MyButton from '../components/MyButton';
+import TaskList from '../components/TaskList';
 
 export type Task = {
       id: number,
@@ -35,19 +36,7 @@ const TodoScreen = ({navigation, route}) => {
       <View style={styles.bottom}>
             <View >
                   <Text style={styles.heading}>My Tasks</Text>
-                  <FlatList
-                        data={tasks}
-                        keyExtractor={item => item.id.toString()}
-                        renderItem={({ item }) => (
-                        <View style={styles.task}>
-                              <Text style={styles.title}>{item.title}</Text>
-                              <Text style={styles.date}>{item.date}</Text>
-                              <TouchableOpacity onPress={()=>handleDetails(item)}>
-                                    <Text style={styles.viewDetailsText}>View Details</Text>
-                              </TouchableOpacity>
-                        </View>
-                        )}
-                  />
+                  <TaskList tasks={tasks} onPressDetails={handleDetails} />
             </View>
             <TouchableOpacity
                   style={styles.fab}
@@ -114,21 +103,7 @@ const styles = StyleSheet.create({
             borderColor: '#ccc',
             marginBottom: 10,
       },
-      title: { 
-            fontSize: 18, 
-            fontWeight: 'bold' },
-      date: { 
-            fontSize: 14, 
-            color: '#888', 
-            marginBottom: 5 
 
-      },
-      viewDetailsText: {
-            color: '#1e90ff',
-            textDecorationLine: 'underline',
-            marginTop: 8,
-            fontSize: 14,
-},
 
 
 })
