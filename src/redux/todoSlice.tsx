@@ -34,10 +34,13 @@ const todoSlice = createSlice({
                   const {field, value} = action.payload;
                   state.form[field as keyof typeof state.form ] = value;
             },
+            clearForm: (state) => {
+                  state.form = {title:'', description: '', date: ''}
+            },
       },
 
 })
 
-export const { addTask, deleteTask, updateForm} = todoSlice.actions;
+export const { addTask, deleteTask, updateForm, clearForm} = todoSlice.actions;
 
 export default todoSlice.reducer;

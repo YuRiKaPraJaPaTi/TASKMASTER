@@ -5,7 +5,7 @@ import MyButton from '../components/MyButton'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, Task } from '../navigation/types';
 import { useAppDispatch } from '../redux/hooks'
-import { addTask, updateForm } from '../redux/todoSlice'
+import { addTask, clearForm, updateForm } from '../redux/todoSlice'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 
@@ -25,12 +25,14 @@ const AddScreen = ({navigation, route}:Props) => {
                         date,
                   };
                   dispatch(addTask(newTask))
+                  dispatch(clearForm())
                   navigation.goBack()
             }
             
       }
 
       const handleCancel = () => {
+            dispatch(clearForm())
             navigation.goBack()
       }
 
