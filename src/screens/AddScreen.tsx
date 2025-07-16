@@ -1,21 +1,20 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { useState } from 'react'
 import MyTextInput from '../components/MyTextInput'
 import MyButton from '../components/MyButton'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, Task } from '../navigation/types';
 import { useAppDispatch } from '../redux/hooks'
-import { addTask } from '../redux/todoSlice'
+import { addTask, updateForm } from '../redux/todoSlice'
+import { useSelector } from 'react-redux'
+import { RootState } from '../redux/store'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Add'>;
 
 const AddScreen = ({navigation, route}:Props) => {
       const dispatch = useAppDispatch();
 
-      const [title, setTitle] = useState('')
-      const [description, setDescription] = useState('')
-      const [date, setDate] = useState('') 
+      const {title, description, date} = useSelector((state: RootState) => state.tasks.form)
 
       const handleSave = () => {
             if (title.trim() && date.trim()) {
@@ -40,9 +39,9 @@ const AddScreen = ({navigation, route}:Props) => {
     <View style={styles.container}>
       <Text style={styles.heading}>Create Task</Text>
       <View style={styles.textInputContainer}>
-            <MyTextInput label='title' value={title} onChangeText={setTitle}/>
-            <MyTextInput label='description' value={description} onChangeText={setDescription}/>
-            <MyTextInput label='Date' value={date} onChangeText={setDate} />
+            <MyTextInput label='title' value={title} onChangeText={(text)=>dispatch(updateForm({field: 'title', value: text}))}/>
+            <MyTextInput label='description' value={description} onChangeText={(text)=>dispatch(updateForm({field: 'description', value: text}))}/>
+            <MyTextInput label='Date' value={date} onChangeText={(text)=>dispatch(updateForm({field: 'date', value: text}))} />
       </View>
       <View style={styles.buttonContainer}>
             <MyButton label='Save' onPress={handleSave}/>
