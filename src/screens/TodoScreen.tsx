@@ -4,19 +4,23 @@ import MyButton from '../components/MyButton';
 import TaskList from '../components/TaskList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, Task } from '../navigation/types';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Todo'>;
 
 const TodoScreen = ({navigation, route}:Props) => {
-      const [tasks, setTasks] = useState<Task[]>([])
+      // const [tasks, setTasks] = useState<Task[]>([])
+      const dispatch = useAppDispatch();
+      const tasks = useAppSelector(state => state.tasks.tasks)
 
 
       const handleAdd = () => {
-            navigation.navigate('Add', {
-                  addTask: (newTask: Task) => {
-                  setTasks(prev => [newTask, ...prev]);
-                  },
-            });
+            navigation.navigate('Add')
+            // navigation.navigate('Add', {
+            //       addTask: (newTask: Task) => {
+            //       setTasks(prev => [newTask, ...prev]);
+            //       },
+            // });
       };
 
       const handleDetails = (task:Task) => {
@@ -24,7 +28,7 @@ const TodoScreen = ({navigation, route}:Props) => {
       };
 
       const handleDelete = (id: number) => {
-            setTasks(prev => prev.filter(task => task.id !== id));
+            // setTasks(prev => prev.filter(task => task.id !== id));
       };
 
 

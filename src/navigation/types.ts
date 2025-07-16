@@ -9,9 +9,7 @@ export type Task = {
 export type RootStackParamList = {
   Home: undefined;
   Todo: undefined;
-  Add: {
-    addTask: (task: Task) => void;
-  };
+  Add: undefined;
   DetailsTask: {
     task: Task;
   };

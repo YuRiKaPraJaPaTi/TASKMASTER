@@ -5,10 +5,14 @@ import MyTextInput from '../components/MyTextInput'
 import MyButton from '../components/MyButton'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, Task } from '../navigation/types';
+import { useAppDispatch } from '../redux/hooks'
+import { addTask } from '../redux/todoSlice'
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Add'>;
 
 const AddScreen = ({navigation, route}:Props) => {
+      const dispatch = useAppDispatch();
+
       const [title, setTitle] = useState('')
       const [description, setDescription] = useState('')
       const [date, setDate] = useState('') 
@@ -21,7 +25,7 @@ const AddScreen = ({navigation, route}:Props) => {
                         description,
                         date,
                   };
-                  route.params?.addTask?.(newTask);
+                  dispatch(addTask(newTask))
                   navigation.goBack()
             }
             
