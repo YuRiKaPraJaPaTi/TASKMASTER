@@ -21,9 +21,9 @@ const TodoScreen = ({navigation, route}) => {
             });
       };
 
-      const handleDetails = (task: Task) => {
-    navigation.navigate('Detail', { task });
-  };
+      const handleDetails = (task:Task) => {
+            navigation.navigate('DetailsTask', {task});
+      };
 
       
 
@@ -42,7 +42,9 @@ const TodoScreen = ({navigation, route}) => {
                         <View style={styles.task}>
                               <Text style={styles.title}>{item.title}</Text>
                               <Text style={styles.date}>{item.date}</Text>
-                              <MyButton label='Details'/>
+                              <TouchableOpacity onPress={()=>handleDetails(item)}>
+                                    <Text style={styles.viewDetailsText}>View Details</Text>
+                              </TouchableOpacity>
                         </View>
                         )}
                   />
@@ -120,6 +122,13 @@ const styles = StyleSheet.create({
             color: '#888', 
             marginBottom: 5 
 
+      },
+      viewDetailsText: {
+            color: '#1e90ff',
+            textDecorationLine: 'underline',
+            marginTop: 8,
+            fontSize: 14,
 },
+
 
 })
