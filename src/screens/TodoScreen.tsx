@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react'
 import MyButton from '../components/MyButton';
 import TaskList from '../components/TaskList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList, Task } from '../navigation/types';
+import { BottomTabParamList, HomeTabScreenProps, RootStackParamList, Task } from '../navigation/types';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { deleteTask } from '../redux/todoSlice';
+import { BottomTabBarProps, BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Todo'>;
+// type Props = BottomTabScreenProps<TodoScreenProps, 'Todo'>;
 
-const TodoScreen = ({navigation, route}:Props) => {
+const TodoScreen = ({navigation, route}:HomeTabScreenProps<'Todo'>) => {
       // const [tasks, setTasks] = useState<Task[]>([])
       // const dispatch = useAppDispatch();
       const tasks = useAppSelector(state => state.tasks.tasks)

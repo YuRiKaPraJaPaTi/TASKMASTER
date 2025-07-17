@@ -8,14 +8,13 @@
 
 import { StatusBar, StyleSheet, useColorScheme, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStaticNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from '../screens/HomeScreen';
 import TodoScreen from '../screens/TodoScreen';
 import AddScreen from '../screens/AddScreen';
 import DetailsTaskScreen from '../screens/DetailsTaskScreen';
 
 import { RootStackParamList } from './types';
+import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -23,9 +22,9 @@ function AppNavigator() {
   
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Todo">
+      <Stack.Navigator initialRouteName="Tabs">
         {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-        <Stack.Screen name="Todo" component={TodoScreen} />
+        <Stack.Screen name="Tabs" component={BottomTabNavigator} options={{ headerShown: false }} />
         <Stack.Screen name="Add" component={AddScreen} />
         <Stack.Screen name="DetailsTask" component={DetailsTaskScreen} />
       </Stack.Navigator>
