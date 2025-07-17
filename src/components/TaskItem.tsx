@@ -4,6 +4,11 @@ import { Task } from '../navigation/types'
 import SocialIcon from './SocialIcon'
 import { useAppDispatch } from '../redux/hooks';
 import { deleteTask } from '../redux/todoSlice';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/types';
+
+type TaskItemNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Add'>;
 
 interface TaskItemProps {
       task: Task;
@@ -12,12 +17,17 @@ interface TaskItemProps {
 }
 
 const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
+      const navigation = useNavigation<TaskItemNavigationProp>();
       const dispatch = useAppDispatch();
 
       const handleDelete = (id: number) => {
                   // setTasks(prev => prev.filter(task => task.id !== id));
                   dispatch(deleteTask(id))
             };
+
+      const handleEdit = () => {
+            navigation.navigate('Add', { taskToEdit: task });
+      };
   return (
     <View style={styles.outerContainer}>
             <View style={styles.taskItem}>
@@ -32,10 +42,11 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
                   </View>
 
                   <View style={styles.iconContainer}>
-                        {/* <SocialIcon 
+                        <SocialIcon 
                               source={require('../../assets/edit.png')}
                               size={22}
-                        /> */}
+                              onPress={handleEdit}
+                        />
                         <SocialIcon 
                               source={require('../../assets/delete.png')}
                               size={22}

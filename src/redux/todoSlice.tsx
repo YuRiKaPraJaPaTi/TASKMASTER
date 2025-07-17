@@ -11,6 +11,8 @@ interface TodoState {
       }
 }
 
+
+
 const initialState: TodoState = {
       tasks: [],
       form: {
@@ -37,10 +39,18 @@ const todoSlice = createSlice({
             clearForm: (state) => {
                   state.form = {title:'', description: '', date: ''}
             },
+            editTask: (state, action: PayloadAction<Task>) => {
+                  
+                  const updatedTask = action.payload;
+                  const index = state.tasks.findIndex(task => task.id === updatedTask.id)
+                  if (index !== -1) {
+                        state.tasks[index] = updatedTask
+                  }
+            }
       },
 
 })
 
-export const { addTask, deleteTask, updateForm, clearForm} = todoSlice.actions;
+export const { addTask, deleteTask, updateForm, clearForm, editTask} = todoSlice.actions;
 
 export default todoSlice.reducer;

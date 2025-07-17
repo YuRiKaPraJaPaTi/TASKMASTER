@@ -4,10 +4,11 @@ import MyTextInput from '../components/MyTextInput'
 import MyButton from '../components/MyButton'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, Task } from '../navigation/types';
-import { useAppDispatch } from '../redux/hooks'
-import { addTask, clearForm, updateForm } from '../redux/todoSlice'
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
+import { addTask, clearForm, updateForm, editTask } from '../redux/todoSlice'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
+import { useEffect } from 'react';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Add'>;
 
@@ -16,20 +17,39 @@ const AddScreen = ({navigation, route}:Props) => {
 
       const {title, description, date} = useSelector((state: RootState) => state.tasks.form)
 
-      const handleSave = () => {
-            if (title.trim() && date.trim()) {
-                  const newTask: Task = {
-                        id: Date.now(),
-                        title,
-                        description,
-                        date,
-                  };
-                  dispatch(addTask(newTask))
-                  dispatch(clearForm())
-                  navigation.goBack()
+      const form = useAppSelector(state => state.tasks.form);
+      const { taskToEdit } = route.params || {}; 
+
+      useEffect(() => {
+            if (taskToEdit) {
+                  dispatch(updateForm({ field: 'title', value: taskToEdit.title }));
+                  dispatch(updateForm({ field: 'description', value: taskToEdit.description }));
+                  dispatch(updateForm({ field: 'date', value: taskToEdit.date }));
+            } else {
+                  dispatch(clearForm());
             }
-            
-      }
+            }, [taskToEdit]);
+
+
+      const handleSave = () => {
+            if (form.title.trim() && form.date.trim()) {
+            const task = {
+                  id: taskToEdit?.id ?? Date.now(), 
+                  title: form.title,
+                  description: form.description,
+                  date: form.date,
+            };
+
+            if (taskToEdit) {
+                  dispatch(editTask(task));
+            } else {
+                  dispatch(addTask(task));
+            }
+
+            dispatch(clearForm());
+            navigation.goBack();
+            }
+            };
 
       const handleCancel = () => {
             dispatch(clearForm())
@@ -39,7 +59,7 @@ const AddScreen = ({navigation, route}:Props) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Create Task</Text>
+      <Text style={styles.heading}>{taskToEdit ? 'Edit Task' : 'Create Task'}</Text>
       <View style={styles.textInputContainer}>
             <MyTextInput label='title' value={title} onChangeText={(text)=>dispatch(updateForm({field: 'title', value: text}))}/>
             <MyTextInput label='description' value={description} onChangeText={(text)=>dispatch(updateForm({field: 'description', value: text}))}/>
