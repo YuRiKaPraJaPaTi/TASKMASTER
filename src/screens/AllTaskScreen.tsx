@@ -1,20 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
-import { useAppSelector } from '../redux/hooks'
-import TaskList from '../components/TaskList'
-import { HistoryTabScreenProps, Task, TopHistoryTabParamList } from '../navigation/types'
+import { HistoryTabScreenProps} from '../navigation/types'
+import FilteredTaskScreen from '../components/FilteredTaskScreen'
 
 const AllTaskScreen = ({navigation}:HistoryTabScreenProps<'All'>) => {
-      const tasks = useAppSelector((state) => state.tasks.tasks)
-      const handlePressDetails = (task: Task) => {
-            navigation.navigate('DetailsTask', { task: task });
-      };
+      
       return (
-            <View>
-                  <TaskList tasks={tasks} onPressDetails={handlePressDetails}  />
-            </View>
-      )
-}
+            <FilteredTaskScreen navigation={navigation} filterFunction={() => true} />
+)}
 
 export default AllTaskScreen
 
