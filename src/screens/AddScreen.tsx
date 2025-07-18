@@ -39,6 +39,8 @@ const AddScreen = ({navigation, route}:Props) => {
                   title: form.title,
                   description: form.description,
                   date: form.date,
+                  isChecked: false,
+
             };
 
             if (taskToEdit) {

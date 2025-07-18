@@ -3,10 +3,12 @@ import React from 'react'
 import { Task } from '../navigation/types'
 import SocialIcon from './SocialIcon'
 import { useAppDispatch } from '../redux/hooks';
-import { deleteTask } from '../redux/todoSlice';
+import { deleteTask, toggleTaskCheck } from '../redux/todoSlice';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
+import CheckBox from '@react-native-community/checkbox';
+
 
 type TaskItemNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Add'>;
 
@@ -28,11 +30,17 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
       const handleEdit = () => {
             navigation.navigate('Add', { taskToEdit: task });
       };
+
+      const handleToggleCheck = () => {
+            dispatch(toggleTaskCheck(task.id))
+      }
+
   return (
     <View style={styles.outerContainer}>
             <View style={styles.taskItem}>
             
-            
+                  <CheckBox value={task.isChecked} onValueChange={handleToggleCheck}/>
+                  
                   <View style={styles.textContainer}>
                         <Text style={styles.title}>{task.title}</Text>
                         <Text style={styles.date}>{task.date}</Text>

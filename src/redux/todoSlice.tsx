@@ -46,11 +46,17 @@ const todoSlice = createSlice({
                   if (index !== -1) {
                         state.tasks[index] = updatedTask
                   }
+            },
+            toggleTaskCheck: (state, action: PayloadAction<number>) => {
+                  const task = state.tasks.find(task => task.id === action.payload)
+                  if (task) {
+                        task.isChecked = !task.isChecked
+                  }
             }
       },
 
 })
 
-export const { addTask, deleteTask, updateForm, clearForm, editTask} = todoSlice.actions;
+export const { addTask, deleteTask, updateForm, clearForm, editTask, toggleTaskCheck} = todoSlice.actions;
 
 export default todoSlice.reducer;

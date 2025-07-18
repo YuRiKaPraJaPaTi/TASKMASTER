@@ -8,6 +8,7 @@ export type Task = {
   title: string;
   description: string;
   date: string;
+  isChecked: boolean;
 };
 
 
@@ -45,8 +46,7 @@ export type HomeTabScreenProps<T extends keyof BottomTabParamList> =
 export type HistoryTabScreenProps<T extends keyof TopHistoryTabParamList> =
   CompositeScreenProps<
     MaterialTopTabScreenProps<TopHistoryTabParamList, T>,
-    RootStackScreenProps<keyof RootStackParamList>
-
+    HomeTabScreenProps<'History'>
   >;
 
 declare global {
