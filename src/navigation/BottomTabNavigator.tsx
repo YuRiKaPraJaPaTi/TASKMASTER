@@ -27,8 +27,8 @@ const BottomTabNavigator = () => {
       tabBar={(props) => <MyTabBar {...props} />}
     >
       <Tab.Screen name="Todo" component={TodoScreen} options={{ headerShown: false, title:'Home' }}/>
-      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
       <Tab.Screen name="History" component={TopHistoryTabNavigation} />
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
     </Tab.Navigator>
   )
 }

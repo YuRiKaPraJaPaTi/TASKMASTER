@@ -20,8 +20,9 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   Todo: undefined;
+  History: NavigatorScreenParams<TopHistoryTabParamList>;
   Profile: undefined;
-  History: undefined;
+  
 }
 
 export type TopHistoryTabParamList = {

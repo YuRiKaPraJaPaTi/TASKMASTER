@@ -4,37 +4,51 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, Task } from '../navigation/types';
 import SocialIcon from '../components/SocialIcon';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useAppDispatch, useAppSelector} from '../redux/hooks';
+import { deleteTask } from '../redux/todoSlice';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'DetailsTask'>;
 
-const DetailsTaskScreen = ({route}:Props) => {
-  const {task} = route.params;
+const DetailsTaskScreen = ({navigation, route}:Props) => {
+  const dispatch = useAppDispatch();
+  const taskId = route.params.task.id;
+
+  const task = useAppSelector((state) =>
+    state.tasks.tasks.find((t) => t.id === taskId)
+  );
+
+  const handleDelete = (id: number) => {
+    dispatch(deleteTask(id))
+    navigation.goBack()
+  }
+
+  const handleEdit = () => {
+    if (task)
+    navigation.navigate('Add', { taskToEdit: task });
+  };
+
   return (
     <View style={styles.container}>
 
       <View style={styles.iconContainer}>
-        <Icon name='home' size={20} color='red'/>
-        <SocialIcon 
-          source={require('../../assets/edit.png')}
-          size={22}
-          // onPress={handleEdit}
-        />
+        
+        <Icon name='edit' size={22} onPress={handleEdit}/>
         <SocialIcon 
           source={require('../../assets/delete.png')}
           size={22}
-          // onPress={()=>handleDelete(task.id)}
+          onPress={()=>handleDelete(taskId)}
                                     
         />
       </View>
 
       <Text style={styles.label}>Title:</Text>
-      <Text style={styles.value}>{task.title}</Text>
+      <Text style={styles.value}>{task?.title}</Text>
 
       <Text style={styles.label}>Date:</Text>
-      <Text style={styles.value}>{task.date}</Text>
+      <Text style={styles.value}>{task?.date}</Text>
 
       <Text style={styles.label}>Description:</Text>
-      <Text style={styles.value}>{task.description || 'No description'}</Text>
+      <Text style={styles.value}>{task?.description || 'No description'}</Text>
 
       
       

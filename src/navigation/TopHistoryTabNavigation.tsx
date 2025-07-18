@@ -10,7 +10,13 @@ const TopTab = createMaterialTopTabNavigator<TopHistoryTabParamList>();
 
 const TopHistoryTabNavigation = () => {
   return (
-    <TopTab.Navigator>
+    <TopTab.Navigator
+      screenOptions={{
+            tabBarStyle: {backgroundColor: 'powderblue'},
+            tabBarLabelStyle: {fontSize: 16}
+            // tabBarItemStyle: {width:100}
+      }}
+    >
       <TopTab.Screen name="All" component={AllTaskScreen}/>
       <TopTab.Screen name="Active" component={ActiveTaskScreen}/>
       <TopTab.Screen name="Completed" component={CompletedTaskScreen}/>

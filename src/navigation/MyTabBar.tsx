@@ -1,6 +1,5 @@
-import { View, Platform, StyleSheet, TouchableOpacity} from 'react-native';
-import { Text, PlatformPressable, } from '@react-navigation/elements';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { View, StyleSheet, TouchableOpacity} from 'react-native';
+import { Text } from '@react-navigation/elements';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 
 
@@ -12,9 +11,10 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                   {state.routes.map((route, index) => {
                         const { options } = descriptors[route.key];
                         const label =
-                        options.tabBarLabel !== undefined
-                              ? options.tabBarLabel
-                              : options.title !== undefined
+                        // options.tabBarLabel !== undefined
+                        //       ? options.tabBarLabel
+                        //       : 
+                              options.title !== undefined
                               ? options.title
                               : route.name;
 
