@@ -3,6 +3,7 @@ import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList, Task } from '../navigation/types';
 import SocialIcon from '../components/SocialIcon';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'DetailsTask'>;
 
@@ -12,6 +13,7 @@ const DetailsTaskScreen = ({route}:Props) => {
     <View style={styles.container}>
 
       <View style={styles.iconContainer}>
+        <Icon name='home' size={20} color='red'/>
         <SocialIcon 
           source={require('../../assets/edit.png')}
           size={22}

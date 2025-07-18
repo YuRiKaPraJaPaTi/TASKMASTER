@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native'
 import React from 'react'
 import MyTextInput from '../components/MyTextInput'
 import MyButton from '../components/MyButton'
@@ -9,6 +9,7 @@ import { addTask, clearForm, updateForm, editTask } from '../redux/todoSlice'
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { useEffect } from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Add'>;
 
@@ -58,18 +59,23 @@ const AddScreen = ({navigation, route}:Props) => {
 
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>{taskToEdit ? 'Edit Task' : 'Create Task'}</Text>
-      <View style={styles.textInputContainer}>
-            <MyTextInput label='title' value={title} onChangeText={(text)=>dispatch(updateForm({field: 'title', value: text}))}/>
-            <MyTextInput label='description' value={description} onChangeText={(text)=>dispatch(updateForm({field: 'description', value: text}))}/>
-            <MyTextInput label='Date' value={date} onChangeText={(text)=>dispatch(updateForm({field: 'date', value: text}))} />
+      <View style={styles.container}>
+            <View style={{ justifyContent: 'flex-start', paddingHorizontal: 50, padding: 20 }}>
+                  <TouchableOpacity onPress={() => navigation.goBack()}>
+                        <Icon name='close' size={30} />
+                  </TouchableOpacity>
+            </View>
+            <Text style={styles.heading}>{taskToEdit ? 'Edit Task' : 'Create Task'}</Text>
+            <View style={styles.textInputContainer}>
+                  <MyTextInput label='title' value={title} onChangeText={(text)=>dispatch(updateForm({field: 'title', value: text}))}/>
+                  <MyTextInput label='description' value={description} onChangeText={(text)=>dispatch(updateForm({field: 'description', value: text}))}/>
+                  <MyTextInput label='Date' value={date} onChangeText={(text)=>dispatch(updateForm({field: 'date', value: text}))} />
+            </View>
+            <View style={styles.buttonContainer}>
+                  <MyButton label='Save' onPress={handleSave}/>
+                  <MyButton label='Cancel'  onPress={handleCancel}/>
+            </View>
       </View>
-      <View style={styles.buttonContainer}>
-            <MyButton label='Save' onPress={handleSave}/>
-            <MyButton label='Cancel'  onPress={handleCancel}/>
-      </View>
-    </View>
   )
 }
 

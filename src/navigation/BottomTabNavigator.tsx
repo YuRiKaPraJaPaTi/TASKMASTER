@@ -17,9 +17,10 @@ const BottomTabNavigator = () => {
             tabBarStyle: styles.tabBar,
             tabBarActiveTintColor: 'tomato',
             tabBarInactiveTintColor: 'gray',
-            headerShown: false
+            headerShown: false,
+            animation: 'fade',
       }}
-      // tabBar={(props) => <MyTabBar {...props} />}
+      tabBar={(props) => <MyTabBar {...props} />}
       // tabBar={({ state, descriptors, navigation }) => (
       // <View style={styles.tabContainer}>
       //       {state.routes.map((route, index) => {
