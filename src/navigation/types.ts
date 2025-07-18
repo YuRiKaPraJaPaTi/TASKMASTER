@@ -1,4 +1,5 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -39,6 +40,13 @@ export type HomeTabScreenProps<T extends keyof BottomTabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<BottomTabParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
+  >;
+
+export type HistoryTabScreenProps<T extends keyof TopHistoryTabParamList> =
+  CompositeScreenProps<
+    MaterialTopTabScreenProps<TopHistoryTabParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+
   >;
 
 declare global {
