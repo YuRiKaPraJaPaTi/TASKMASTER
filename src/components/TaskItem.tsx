@@ -33,7 +33,11 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
 
       const handleToggleCheck = () => {
             dispatch(toggleTaskCheck(task.id))
-      }
+      };
+
+      const handleDetails = (task:Task) => {
+            navigation.navigate('DetailsTask', {task});
+      };
 
   return (
     <View style={styles.outerContainer}>
@@ -45,8 +49,8 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
                         <Text style={styles.title}>{task.title}</Text>
                         <Text style={styles.date}>{task.date}</Text>
                         <TouchableOpacity onPress={onPressDetails}>
-                        <Text style={styles.viewDetailsText}>View Details</Text>
-                  </TouchableOpacity>
+                              <Text style={styles.viewDetailsText}>View Details</Text>
+                        </TouchableOpacity>
                   </View>
 
                   <View style={styles.iconContainer}>

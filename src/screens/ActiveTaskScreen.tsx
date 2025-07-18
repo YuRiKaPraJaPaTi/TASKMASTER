@@ -1,10 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { useAppSelector } from '../redux/hooks';
+import { Task } from '../navigation/types';
+import TaskList from '../components/TaskList';
 
-const ActiveTaskScreen = () => {
+const ActiveTaskScreen = (navigation) => {
+   const tasks = useAppSelector((state) => state.tasks.tasks)
+  const ctasks = tasks.filter((task) => !task.isChecked);
+
+  const handlePressDetails = (task: Task) => {
+    navigation.navigate('DetailsTask', { task: task });
+  };
   return (
     <View>
-      <Text>ActiveTaskScreen</Text>
+      <TaskList tasks={ctasks} onPressDetails={handlePressDetails}  />
     </View>
   )
 }
