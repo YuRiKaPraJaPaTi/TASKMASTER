@@ -21,7 +21,13 @@ export type RootStackParamList = {
 export type BottomTabParamList = {
   Todo: undefined;
   Profile: undefined;
-  Settings: undefined;
+  History: undefined;
+}
+
+export type TopHistoryTabParamList = {
+  All: undefined;
+  Active: undefined;
+  Completed: undefined;
 }
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

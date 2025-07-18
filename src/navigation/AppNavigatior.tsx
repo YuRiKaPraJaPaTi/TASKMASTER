@@ -16,6 +16,7 @@ import DetailsTaskScreen from '../screens/DetailsTaskScreen';
 import { RootStackParamList } from './types';
 import BottomTabNavigator from './BottomTabNavigator';
 
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {

@@ -4,8 +4,12 @@ import TodoScreen from '../screens/TodoScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { BottomTabParamList } from './types'
-import SettingScreen from '../screens/SettingScreen'
+import HistoryScreen from '../screens/CompletedTaskScreen'
 import MyTabBar from '../navigation/MyTabBar'
+import TopHistoryTabNavigation from './TopHistoryTabNavigation'
+
+
+
 
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
@@ -21,50 +25,10 @@ const BottomTabNavigator = () => {
             animation: 'fade',
       }}
       tabBar={(props) => <MyTabBar {...props} />}
-      // tabBar={({ state, descriptors, navigation }) => (
-      // <View style={styles.tabContainer}>
-      //       {state.routes.map((route, index) => {
-      //       const { options } = descriptors[route.key];
-      //       const label =
-      //       options.tabBarLabel !== undefined
-      //             ? options.tabBarLabel
-      //             : options.title !== undefined
-      //             ? options.title
-      //             : route.name;
-
-      //       const isFocused = state.index === index;
-
-      //       const onPress = () => {
-      //       const event = navigation.emit({
-      //             type: 'tabPress',
-      //             target: route.key,
-      //             canPreventDefault: true,
-      //       });
-
-      //       if (!isFocused && !event.defaultPrevented) {
-      //             navigation.navigate(route.name);
-      //       }
-      //       };
-
-      //       return (
-      //       <TouchableOpacity
-      //             key={route.key}
-      //             onPress={onPress}
-      //             style={[styles.tabBox, isFocused && styles.activeTabBox]}
-      //       >
-      //             <Text style={[styles.tabLabel, isFocused && styles.activeLabel]}>
-      //             {label}
-      //             </Text>
-      //       </TouchableOpacity>
-      //       );
-      //       })}
-      // </View>
-//   )}
-  
     >
       <Tab.Screen name="Todo" component={TodoScreen} options={{ headerShown: false, title:'Home' }}/>
       <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
-      <Tab.Screen name="Settings" component={SettingScreen} />
+      <Tab.Screen name="History" component={TopHistoryTabNavigation} />
     </Tab.Navigator>
   )
 }

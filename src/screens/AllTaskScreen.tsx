@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const SettingScreen = () => {
+const AllTaskScreen = () => {
   return (
     <View>
-      <Text>SettingScreen</Text>
+      <Text>AllTaskScreen</Text>
     </View>
   )
 }
 
-export default SettingScreen
+export default AllTaskScreen
 
 const styles = StyleSheet.create({})
