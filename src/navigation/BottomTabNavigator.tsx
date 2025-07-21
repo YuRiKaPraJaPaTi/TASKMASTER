@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
 import React from 'react'
 import TodoScreen from '../screens/TodoScreen'
 import ProfileScreen from '../screens/ProfileScreen'
@@ -7,8 +7,8 @@ import { BottomTabParamList } from './types'
 import HistoryScreen from '../screens/CompletedTaskScreen'
 import MyTabBar from '../navigation/MyTabBar'
 import TopHistoryTabNavigation from './TopHistoryTabNavigation'
-
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import DrawerHistoryNavigation from './DrawerHistoryNavigation'
 
 
 
@@ -26,9 +26,32 @@ const BottomTabNavigator = () => {
       }}
       tabBar={(props) => <MyTabBar {...props} />}
     >
-      <Tab.Screen name="Todo" component={TodoScreen} options={{ headerShown: false, title:'Home' }}/>
-      <Tab.Screen name="History" component={TopHistoryTabNavigation} />
-      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
+      <Tab.Screen 
+            name="Todo" 
+            component={TodoScreen} 
+            options={{  headerTitle:'',tabBarLabel:'Home', title:'Home',
+                  headerShown: true ,
+                  
+                  headerLeft: () => (
+                        <TouchableOpacity style={{ marginLeft: 15 }}>
+                        <Image
+                        source={require("../../assets/profile.png")}
+                        style={{ width: 36, height: 36, borderRadius: 18 }}
+                        />
+                        </TouchableOpacity>
+                  ),
+                  headerRight: () => (
+                        <TouchableOpacity style={{ marginRight: 15 }}>
+                        <Icon name="bell" size={22} color="black" />
+                        </TouchableOpacity>
+                  ),
+                  // tabBarIcon: ({ color, size }) => (
+                  //       <Icon name="home" size={size} color={color} />
+                  // ),
+            }}
+      />
+      <Tab.Screen name="History" component={TopHistoryTabNavigation} options={{  headerShown: true }}/>
+      <Tab.Screen name="Profile" component={DrawerHistoryNavigation} options={{ headerShown: true }}/>
     </Tab.Navigator>
   )
 }

@@ -33,6 +33,12 @@ export type TopHistoryTabParamList = {
   Completed: undefined;
 }
 
+export type DrawerHistoryParamList = {
+  All: undefined;
+  Active: undefined;
+  Completed: undefined;
+}
+
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
 

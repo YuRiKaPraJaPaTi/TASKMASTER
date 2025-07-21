@@ -1,7 +1,7 @@
 import { View, StyleSheet, TouchableOpacity} from 'react-native';
 import { Text } from '@react-navigation/elements';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
  
@@ -12,11 +12,19 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                         const { options } = descriptors[route.key];
                         const label =
                         // options.tabBarLabel !== undefined
-                        //       ? options.tabBarLabel
-                        //       : 
+                              // ? options.tabBarLabel
+                              // : 
                               options.title !== undefined
                               ? options.title
                               : route.name;
+
+                        const iconName = route.name === 'Todo'
+                              ? 'home'
+                              : route.name === 'History'
+                              ? 'history'
+                              : route.name === 'Profile'
+                              ? 'user'
+                              : 'what';
 
                         const isFocused = state.index === index;
 
@@ -39,6 +47,8 @@ function MyTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
                                     onPress={onPress}
                                     style={[styles.tabBox, isFocused && styles.activeTabBox]}
                                     >
+                                    {/* <Icon name='home' size={20}/> */}
+                                    <Icon name={iconName} size={20} color={isFocused ? 'white' : 'black'} />
                                     <Text style={[styles.tabLabel, isFocused && styles.activeLabel]}>
                                           {label}
                                     </Text>
