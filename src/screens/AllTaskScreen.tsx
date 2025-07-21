@@ -6,6 +6,7 @@ import FilteredTaskScreen from '../components/FilteredTaskScreen'
 const AllTaskScreen = ({navigation}:HistoryTabScreenProps<'All'>) => {
       
       return (
+            
             <FilteredTaskScreen navigation={navigation} filterFunction={() => true} />
 )}
 

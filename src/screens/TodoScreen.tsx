@@ -31,6 +31,7 @@ const TodoScreen = ({navigation, route}:HomeTabScreenProps<'Todo'>) => {
 
       return (
     <View style={styles.container}>
+      
       <View style={styles.top}>
             <Text>To-do List</Text>
       </View>

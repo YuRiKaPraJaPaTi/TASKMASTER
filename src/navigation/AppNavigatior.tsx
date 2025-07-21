@@ -17,6 +17,7 @@ import { RootStackParamList } from './types';
 import BottomTabNavigator from './BottomTabNavigator';
 import 'react-native-gesture-handler';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import DrawerHistoryNavigation from './DrawerNavigation';
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -24,11 +25,11 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function AppNavigator() {
   
   return (
-    <GestureHandlerRootView style={{flex:1}}>
-        <NavigationContainer>
+  
+          
           <Stack.Navigator initialRouteName="Tabs">
             {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-            <Stack.Screen name="Tabs" component={BottomTabNavigator} options={{ headerShown: false }} />
+            <Stack.Screen name="Tabs" component={BottomTabNavigator} options={{ headerShown: false}} />
 
             {/* <Stack.Screen 
               name="Add" 
@@ -50,8 +51,7 @@ function AppNavigator() {
 
             
           </Stack.Navigator>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    
   );
 }
 

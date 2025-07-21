@@ -8,7 +8,7 @@ import HistoryScreen from '../screens/CompletedTaskScreen'
 import MyTabBar from '../navigation/MyTabBar'
 import TopHistoryTabNavigation from './TopHistoryTabNavigation'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import DrawerHistoryNavigation from './DrawerHistoryNavigation'
+import DrawerHistoryNavigation from './DrawerNavigation'
 
 
 
@@ -17,21 +17,17 @@ const Tab = createBottomTabNavigator<BottomTabParamList>();
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={{
-            tabBarStyle: styles.tabBar,
-            tabBarActiveTintColor: 'tomato',
-            tabBarInactiveTintColor: 'gray',
-            headerShown: false,
-            animation: 'fade',
-      }}
+      
       tabBar={(props) => <MyTabBar {...props} />}
     >
       <Tab.Screen 
             name="Todo" 
             component={TodoScreen} 
             options={{  headerTitle:'',tabBarLabel:'Home', title:'Home',
-                  headerShown: true ,
-                  
+                   headerStyle: {
+                        backgroundColor: 'powderblue', // Change this to your desired color
+                  },
+                  headerShown: false,
                   headerLeft: () => (
                         <TouchableOpacity style={{ marginLeft: 15 }}>
                         <Image
@@ -50,8 +46,8 @@ const BottomTabNavigator = () => {
                   // ),
             }}
       />
-      <Tab.Screen name="History" component={TopHistoryTabNavigation} options={{  headerShown: true }}/>
-      <Tab.Screen name="Profile" component={DrawerHistoryNavigation} options={{ headerShown: true }}/>
+      <Tab.Screen name="History" component={TopHistoryTabNavigation} options={{  headerShown: false }}/>
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/>
     </Tab.Navigator>
   )
 }
@@ -59,39 +55,6 @@ const BottomTabNavigator = () => {
 export default BottomTabNavigator
 
 const styles = StyleSheet.create({
-      tabBar: {
-            backgroundColor: '#fff',
-            height: 60,
-            elevation: 20, 
-            shadowColor: 'skyblue', 
-            shadowOffset: { width: 1, height: 5 },
-            shadowOpacity: 0.1,
-            shadowRadius: 4,
-      },
-      tabContainer: {
-            flexDirection: 'row',
-            height: 60,
-            backgroundColor: '#eee',
-            borderTopWidth: 1,
-            borderTopColor: '#ccc',
-      },
-      tabBox: {
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#ddd',
-      },
-      activeTabBox: {
-            backgroundColor: '#4A90E2', 
-      },
-      tabLabel: {
-            color: '#555',
-            fontSize: 14,
-      },
-      activeLabel: {
-            color: '#fff',
-            fontWeight: 'bold',
-      },
 
 })
 

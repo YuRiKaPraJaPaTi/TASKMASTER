@@ -34,6 +34,7 @@ export type TopHistoryTabParamList = {
 }
 
 export type DrawerHistoryParamList = {
+  Menu: undefined;
   All: undefined;
   Active: undefined;
   Completed: undefined;

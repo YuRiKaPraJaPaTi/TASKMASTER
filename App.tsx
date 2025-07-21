@@ -10,6 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppNavigator from './src/navigation/AppNavigatior';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
+import DrawerNavigation from './src/navigation/DrawerNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,8 @@ function App() {
   
   return (
     <Provider store={store}>
-      <AppNavigator />
+      {/* <AppNavigator /> */}
+      <DrawerNavigation />
     </Provider>
   );
 }
