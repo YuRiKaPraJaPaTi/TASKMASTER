@@ -14,19 +14,33 @@ import DrawerNavigation from './src/navigation/DrawerNavigation';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './src/redux/hooks';
 import { setTasks } from './src/redux/todoSlice';
+import { getTasksFromStorage, storeTaskToStorage } from './src/redux/storage';
 import { RootState } from './src/redux/store';
-import Mainapp from './Mainapp'
 
-// const Stack = createNativeStackNavigator();
 
-function App() {
 
+function Mainapp() {
+  const dispatch = useAppDispatch();
+  const tasks = useAppSelector((state: RootState) => state.tasks.tasks)
+
+  useEffect(() => {
+    const loadTasks = async () => {
+      const savedTasks = await getTasksFromStorage();
+      dispatch (setTasks(savedTasks))
+    }
+
+    loadTasks()
+  }, [dispatch])
+
+  useEffect(() => {
+    storeTaskToStorage(tasks);
+  }, [tasks]);
 
   
   return (
-    <Provider store={store}>
-      <Mainapp />
-    </Provider>
+   
+      <DrawerNavigation />
+    
   );
 }
 
@@ -36,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+export default Mainapp;
