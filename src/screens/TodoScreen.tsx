@@ -5,9 +5,6 @@ import TaskList from '../components/TaskList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabParamList, HomeTabScreenProps, RootStackParamList, Task } from '../navigation/types';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { deleteTask } from '../redux/todoSlice';
-import { BottomTabBarProps, BottomTabScreenProps } from '@react-navigation/bottom-tabs';
-import { ReactNativeFirebase } from '@react-native-firebase/app';
 
 // type Props = BottomTabScreenProps<TodoScreenProps, 'Todo'>;
 
