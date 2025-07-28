@@ -16,10 +16,16 @@ import { useAppDispatch, useAppSelector } from './src/redux/hooks';
 import { setTasks } from './src/redux/todoSlice';
 import { getTasksFromStorage, storeTaskToStorage } from './src/redux/storage';
 import { RootState } from './src/redux/store';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import AuthStack from './src/navigation/AuthStack';
+import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 
 
 
 function Mainapp() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [initializing, setInitializing] = useState(true);
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state: RootState) => state.tasks.tasks)
 
@@ -36,10 +42,34 @@ function Mainapp() {
     storeTaskToStorage(tasks);
   }, [tasks]);
 
+   useEffect(() => {
+    const subscriber = onAuthStateChanged(getAuth(), user => {
+      setIsLoggedIn(!!user);
+      if (initializing) setInitializing(false);
+    });
+
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  if (initializing) return null;
+
   
   return (
    
-      <DrawerNavigation />
+      
+    <GestureHandlerRootView style={{flex:1}}>
+
+      <NavigationContainer>
+        {/* <DrawerNavigation /> */}
+        {/* <AppNavigator /> */}
+        {/* <AuthStack onLogin={() => setIsLoggedIn(true)}/> */}
+         {isLoggedIn ? (
+          <AppNavigator />
+          ) : (
+          <AuthStack onLogin={() => setIsLoggedIn(true)} />
+        )}
+      </NavigationContainer>
+    </GestureHandlerRootView>
     
   );
 }

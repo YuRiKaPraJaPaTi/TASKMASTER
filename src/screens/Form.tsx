@@ -1,0 +1,219 @@
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import InputText from '../components/InputText';
+import SocialIcon from '../components/SocialIcon';
+import  Icon  from 'react-native-vector-icons/FontAwesome';
+
+// Type for Form Values
+interface FormProps {
+  title: string;
+  buttonLabel: string;
+  showUsernameField?: boolean;
+  onSubmit: (form: FormValues) => void;
+  onToggleForm: () => void;
+  loading?: boolean;
+  
+ 
+}
+
+export interface FormValues {
+  username?: string;
+  email: string;
+  password: string;
+}
+
+const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, loading}: FormProps) => {
+  const [form, setForm] = useState<FormValues>({ email: '', password: '', username: '' });
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+ 
+  // Handle password visibility toggle
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
+
+  // Handle form submission
+  const handleSubmit = () => {
+  
+      onSubmit(form);
+     };
+
+
+  return (
+    <View style={styles.container}>
+      
+        <KeyboardAvoidingView style={{ flex: 1 }} keyboardVerticalOffset={60}>
+          <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+            <Text style={styles.title}>{title === 'Login' ? 'Welcome' : 'Create Account'}</Text>
+
+            
+
+            {showUsernameField && (
+              <InputText
+                placeholder="Username"
+                iconSource={require('../../assets/username.png')}
+                value={form.username!}
+                onChangeText={(text) => setForm({ ...form, username: text })}
+                
+              />
+            )}
+
+            
+
+            <InputText
+              iconSource={require('../../assets/email.png')}
+              placeholder="email"
+              value={form.email}
+              onChangeText={(text) => setForm({ ...form, email: text })}
+              
+            />
+          
+
+            <InputText
+              iconSource={require('../../assets/password.png')}
+              placeholder="password"
+              value={form.password}
+              onChangeText={(text) => setForm({ ...form, password: text })}
+              secureTextEntry={!isPasswordVisible}
+              onIconPress={togglePasswordVisibility}
+              
+            />
+            
+
+            <Text style={styles.forgotPassword}>Forgot Password?</Text>
+
+
+            <TouchableOpacity style={styles.button} onPress={handleSubmit} >
+              {loading ? (
+                <ActivityIndicator size="small" color="white" />
+              ) : (
+                <Text style={styles.text}>{buttonLabel}</Text>
+              )}
+            </TouchableOpacity>
+
+            <Text style={{ alignSelf: 'center', fontSize: 20, fontWeight: 'bold' }}>OR</Text>
+
+            <View style={styles.images}>
+              
+              <TouchableOpacity style={styles.buttonBox}>
+                <Icon name="google" size={20} color="white" style={styles.icon} />
+                <Text style={styles.buttonText}>Sign up with Facebook</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.buttonBox}>
+                <Icon name="facebook" size={20} color="white" style={styles.icon} />
+                <Text style={styles.buttonText}>Sign up with Facebook</Text>
+              </TouchableOpacity>
+                      
+              
+            </View>
+
+            <Text style={styles.signUp}>
+              {title === 'Login' ? "Don't have an account? " : "Already have an account? "}
+              <Text style={styles.signUpLink} onPress={onToggleForm}>
+                {title === 'Login' ? 'Sign Up' : 'Login'}
+              </Text>
+            </Text>
+          </ScrollView>
+        </KeyboardAvoidingView>
+      
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingVertical: 16,
+    paddingHorizontal: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'powderblue',
+    // borderRadius: 20,
+    marginBottom: 20,
+    shadowColor: 'purple',
+    shadowOffset: { width: 8, height: 8 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 5,
+  },
+  scrollContainer: {
+    padding: 20,
+    justifyContent: 'center',
+  },
+  title: {
+    fontSize: 44,
+    // color: 'black',
+    marginBottom: 48,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'rgba(82, 63, 205, 0.8)', // light semi-transparent white
+    textShadowColor: '#000',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
+  
+  },
+  signUp: {
+    fontSize: 24,
+    color: '#000',
+    marginBottom: 30,
+  },
+  signUpLink: {
+    color: '#4267B2',
+    textDecorationLine: 'underline',
+  },
+  forgotPassword: {
+    color: '#4267B2',
+    fontSize: 16
+  },
+  button: {
+    marginVertical: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#4267B2',
+    padding: 12,
+    borderRadius: 8,
+    justifyContent: 'center',
+  },
+  text: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  images: {
+    marginVertical: 24,
+    display: 'flex',
+    // flexDirection: 'row',
+    gap: 16,
+    justifyContent: 'center',
+  },
+  input: {
+    height: 50,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 10,
+    borderRadius: 5,
+  },
+  buttonBox: {
+    
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#4267B2',
+    padding: 12,
+    borderRadius: 8,
+    justifyContent: 'center',
+  },
+  icon: {
+    marginRight: 10,
+  },
+
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+
+});
+
+export default Form;

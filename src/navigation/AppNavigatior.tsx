@@ -7,29 +7,37 @@
 
 
 import { StatusBar, StyleSheet, useColorScheme, View, Text } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TodoScreen from '../screens/TodoScreen';
 import AddScreen from '../screens/AddScreen';
 import DetailsTaskScreen from '../screens/DetailsTaskScreen';
-
 import { RootStackParamList } from './types';
 import BottomTabNavigator from './BottomTabNavigator';
 import 'react-native-gesture-handler';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import DrawerHistoryNavigation from './DrawerNavigation';
+import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
+import { useEffect, useState } from 'react';
+
 
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
-  
+
   return (
   
           
           <Stack.Navigator initialRouteName="Tabs">
             {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-            <Stack.Screen name="Tabs" component={BottomTabNavigator} options={{ headerShown: false}} />
+            <Stack.Screen name="Tabs" component={BottomTabNavigator}  
+            options={({ route }) => {
+              // headerShown: false
+              const routeName = getFocusedRouteNameFromRoute(route) ;
+              return {
+                drawerLabel: routeName, 
+                title: routeName        
+                };
+              }}
+            />
 
             {/* <Stack.Screen 
               name="Add" 

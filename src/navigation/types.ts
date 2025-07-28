@@ -2,6 +2,7 @@ import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import AuthStack from "./AuthStack";
 
 export type Task = {
   id: number;
@@ -11,8 +12,15 @@ export type Task = {
   isChecked: boolean;
 };
 
+export type AuthStackParamList = {
+  Welcome: undefined;
+  Login: undefined;
+  Signup: undefined;
+};
+
 
 export type RootStackParamList = {
+  Auth: undefined;
   Tabs:NavigatorScreenParams<BottomTabParamList> ;
   Add: {taskToEdit?: Task} | undefined
   DetailsTask: {
@@ -43,6 +51,11 @@ export type DrawerHistoryParamList = {
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
 
+export type CombinedScreenProps<T extends keyof RootStackParamList> = 
+  CompositeScreenProps<
+      NativeStackScreenProps<AuthStackParamList>,
+      RootStackScreenProps<keyof RootStackParamList>
+    >
 
 export type HomeTabScreenProps<T extends keyof BottomTabParamList> =
   CompositeScreenProps<
