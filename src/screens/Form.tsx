@@ -13,7 +13,11 @@ interface FormProps {
   onSubmit: (form: FormValues) => void;
   onToggleForm: () => void;
   loading?: boolean;
-  
+  externalErrors?: {
+    email?: string;
+    password?: string;
+    username?: string;
+  };
  
 }
 
@@ -21,11 +25,16 @@ export interface FormValues {
   username?: string;
   email: string;
   password: string;
+  
 }
 
-const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, loading}: FormProps) => {
+const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, loading, externalErrors}: FormProps) => {
   const [form, setForm] = useState<FormValues>({ email: '', password: '', username: '' });
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+   const [emailValid, setEmailValid] = useState(true);
+  const [passwordValid, setPasswordValid] = useState(true);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null); 
 
  
   // Handle password visibility toggle
@@ -33,10 +42,54 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
     setIsPasswordVisible(!isPasswordVisible);
   };
 
+  // Handle email validation
+  const handleEmailChange = (email: string) => {
+    setForm({ ...form, email });
+
+     if (externalErrors?.email) externalErrors.email = undefined;
+    
+     if (!email) {
+      setEmailError(null);
+      setEmailValid(true);
+    } else {
+      // Validate the email format
+      const emailFormat = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailFormat.test(email)) {
+        setEmailValid(false);
+        setEmailError('Please enter a valid email address.');
+      } else {
+        setEmailValid(true);
+        setEmailError(null);
+      }
+      }
+  };
+
+   // Handle password validation
+  const handlePasswordChange = (password: string) => {
+    setForm({ ...form, password });
+
+    if (externalErrors?.password) externalErrors.password = undefined;
+
+    if (!password) {
+      setPasswordError(null);
+      setPasswordValid(true);
+    } else {
+      // Validate the password length
+      if (password.length < 6) {
+        setPasswordValid(false);
+        setPasswordError('Password must be at least 6 characters.');
+      } else {
+        setPasswordValid(true);
+        setPasswordError(null);
+      }
+    }
+  };
+
   // Handle form submission
   const handleSubmit = () => {
-  
+    if (emailValid && passwordValid) {
       onSubmit(form);
+    }
      };
 
 
@@ -55,7 +108,7 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
                 iconSource={require('../../assets/username.png')}
                 value={form.username!}
                 onChangeText={(text) => setForm({ ...form, username: text })}
-                
+                style={[styles.input, externalErrors?.username && styles.errorBorder]}
               />
             )}
 
@@ -65,10 +118,12 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
               iconSource={require('../../assets/email.png')}
               placeholder="email"
               value={form.email}
-              onChangeText={(text) => setForm({ ...form, email: text })}
-              
+              onChangeText={handleEmailChange}
+              style={[styles.input, (!emailValid || externalErrors?.email) && styles.errorBorder]}
             />
-          
+            {(!emailValid || externalErrors?.email) && (
+            <Text style={styles.errorText}>{externalErrors?.email || emailError}</Text>
+            )}
 
             <InputText
               iconSource={require('../../assets/password.png')}
@@ -77,8 +132,12 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
               onChangeText={(text) => setForm({ ...form, password: text })}
               secureTextEntry={!isPasswordVisible}
               onIconPress={togglePasswordVisibility}
-              
+              style={[styles.input, (!passwordValid || externalErrors?.password) && styles.errorBorder]}
             />
+            {(!passwordValid || externalErrors?.password) && (
+                  <Text style={styles.errorText}>{externalErrors?.password || passwordError}</Text>
+            )}
+
             
 
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
@@ -197,7 +256,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   buttonBox: {
-    
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#4267B2',
@@ -213,7 +271,15 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
   },
-
+  errorBorder: {
+    borderColor: 'red',
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 14,
+    marginBottom: 10,
+    marginLeft: 10,
+  },
 });
 
 export default Form;
