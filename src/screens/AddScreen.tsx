@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { useEffect } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Add'>;
 
@@ -31,6 +33,12 @@ const AddScreen = ({navigation, route}:Props) => {
             }
             }, [taskToEdit]);
 
+      const user = auth().currentUser;
+
+      if (!user?.uid) {
+      console.error('User is not authenticated');
+      return;
+      }
 
       const handleSave = () => {
             if (form.title.trim() && form.date.trim()) {
@@ -40,8 +48,20 @@ const AddScreen = ({navigation, route}:Props) => {
                   description: form.description,
                   date: form.date,
                   isChecked: false,
-
+                  userID: user.uid,
             };
+
+            // // Add to Firestore
+            // firestore()
+            // .collection('tasks')
+            // .doc(String(task.id)) 
+            // .set(task)
+            // .then(() => {
+            // console.log('Task added to Firestore');
+            // })
+            // .catch((error) => {
+            // console.error('Error adding task to Firestore:', error);
+            // });
 
             if (taskToEdit) {
                   dispatch(editTask(task));

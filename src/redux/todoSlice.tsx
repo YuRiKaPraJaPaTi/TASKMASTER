@@ -1,6 +1,7 @@
 import { createSlice} from "@reduxjs/toolkit";
 import { Task } from "../navigation/types";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { addTaskToFirestore } from "../Database/FirestoreDB";
 
 interface TodoState {
       tasks: Task[],
@@ -30,7 +31,9 @@ const todoSlice = createSlice({
                   state.tasks = action.payload
             },
             addTask: (state, action: PayloadAction<Task>) => {
-                  state.tasks.push(action.payload)
+                  const newTask = action.payload
+                  state.tasks.push(newTask)
+                  addTaskToFirestore(newTask)
             },
             deleteTask: (state, action: PayloadAction<number>) => {
                   state.tasks = state.tasks.filter(task => task.id !== action.payload)

@@ -10,6 +10,7 @@ export type Task = {
   description: string;
   date: string;
   isChecked: boolean;
+  userID: string;
 };
 
 export type AuthStackParamList = {

@@ -29,18 +29,18 @@ function Mainapp() {
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state: RootState) => state.tasks.tasks)
 
-  useEffect(() => {
-    const loadTasks = async () => {
-      const savedTasks = await getTasksFromStorage();
-      dispatch (setTasks(savedTasks))
-    }
+  // useEffect(() => {
+  //   const loadTasks = async () => {
+  //     const savedTasks = await getTasksFromStorage();
+  //     dispatch (setTasks(savedTasks))
+  //   }
 
-    loadTasks()
-  }, [dispatch])
+  //   loadTasks()
+  // }, [dispatch])
 
-  useEffect(() => {
-    storeTaskToStorage(tasks);
-  }, [tasks]);
+  // useEffect(() => {
+  //   storeTaskToStorage(tasks);
+  // }, [tasks]);
 
    useEffect(() => {
     const subscriber = onAuthStateChanged(getAuth(), user => {
