@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert } from 'react-native';
 import { ActivityIndicator } from 'react-native';
 import InputText from '../components/InputText';
 import SocialIcon from '../components/SocialIcon';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
+import { onGoogleButtonPress } from './Google/GoogleSignInService';
 
 // Type for Form Values
 interface FormProps {
@@ -92,6 +93,16 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
     }
      };
 
+     const handleGoogleLogin = async () => {
+    try {
+      const userCredential = await onGoogleButtonPress();
+      Alert.alert('Login Success', `Welcome ${userCredential.user.displayName}`);
+      // Navigate to main app here
+    } catch (error) {
+      Alert.alert('Login Failed');
+    }
+  };
+
 
   return (
     <View style={styles.container}>
@@ -129,7 +140,7 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
               iconSource={require('../../assets/password.png')}
               placeholder="password"
               value={form.password}
-              onChangeText={(text) => setForm({ ...form, password: text })}
+              onChangeText={handlePasswordChange}
               secureTextEntry={!isPasswordVisible}
               onIconPress={togglePasswordVisibility}
               style={[styles.input, (!passwordValid || externalErrors?.password) && styles.errorBorder]}
@@ -155,9 +166,11 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
 
             <View style={styles.images}>
               
-              <TouchableOpacity style={styles.buttonBox}>
+              <TouchableOpacity style={styles.buttonBox}
+              onPress={() => handleGoogleLogin().then(() => console.log('Signed in with Google!'))}
+              >
                 <Icon name="google" size={20} color="white" style={styles.icon} />
-                <Text style={styles.buttonText}>Sign up with Facebook</Text>
+                <Text style={styles.buttonText}>Sign up with Google</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.buttonBox}>

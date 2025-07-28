@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth';
 import Form, { FormValues } from './Form';
 import { AuthStackParamList } from '../navigation/types';
 
+
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'> & {
   onLogin: () => void;
 };

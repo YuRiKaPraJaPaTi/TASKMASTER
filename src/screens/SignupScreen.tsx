@@ -63,8 +63,7 @@ const SignupScreen = ({ navigation }: Props) => {
       onSubmit={handleSignup}
       onToggleForm={() => navigation.navigate('Login')}
       loading={loading}
-      
-      
+      externalErrors={fieldErrors}
     />
   );
 };

@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:83705818489:android:75aa1d059860492f6fd3a8",
+        "mobilesdk_app_id": "1:83705818489:android:92c640136fde3df76fd3a8",
         "android_client_info": {
-          "package_name": "com.taskmaster"
+          "package_name": "com.awesomeproject"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "83705818489-jvso48hphfis79jbj0c7br34pspchbdc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDoGwMgbBVQtVYMkgXqGJ_KXQLg-fXuCm4"
@@ -20,7 +25,78 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83705818489-jvso48hphfis79jbj0c7br34pspchbdc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83705818489:android:75aa1d059860492f6fd3a8",
+        "android_client_info": {
+          "package_name": "com.taskmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83705818489-jvso48hphfis79jbj0c7br34pspchbdc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoGwMgbBVQtVYMkgXqGJ_KXQLg-fXuCm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83705818489-jvso48hphfis79jbj0c7br34pspchbdc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83705818489:android:d33d06714e6b6bb86fd3a8",
+        "android_client_info": {
+          "package_name": "com.taskmaster.yurika"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83705818489-79cd6sj7v95efbhorcm7578luk0hgb6p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.taskmaster.yurika",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "83705818489-jvso48hphfis79jbj0c7br34pspchbdc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoGwMgbBVQtVYMkgXqGJ_KXQLg-fXuCm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83705818489-jvso48hphfis79jbj0c7br34pspchbdc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

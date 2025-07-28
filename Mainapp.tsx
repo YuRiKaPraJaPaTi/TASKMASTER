@@ -62,7 +62,7 @@ function Mainapp() {
       <NavigationContainer>
         {/* <DrawerNavigation /> */}
         {/* <AppNavigator /> */}
-        {/* <AuthStack onLogin={() => setIsLoggedIn(true)}/> */}
+        
          {isLoggedIn ? (
           <AppNavigator />
           ) : (

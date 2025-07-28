@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import auth, { getAuth, signOut } from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
 
 const ProfileScreen = () => {
@@ -9,7 +10,16 @@ const ProfileScreen = () => {
   const initial = email.charAt(0).toUpperCase();
 
   const handleLogout = async () => {
-    signOut(getAuth()).then(() => console.log('User signed out!'));
+    // signOut(getAuth()).then(() => console.log('User signed out!'));
+      try {
+         
+        await auth().signOut();   
+        await GoogleSignin.revokeAccess(); 
+        // await GoogleSignin.signOut();   
+      }catch (error) {
+      console.error('Error signing out:', error);
+    }
+  
   };
 
   return (
