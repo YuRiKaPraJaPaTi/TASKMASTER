@@ -5,6 +5,9 @@ import TaskList from '../components/TaskList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabParamList, HomeTabScreenProps, RootStackParamList, Task } from '../navigation/types';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { getTasksFromFirestore } from '../Database/FirestoreDB';
+import { setTasks } from '../redux/todoSlice';
+import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 
 // type Props = BottomTabScreenProps<TodoScreenProps, 'Todo'>;
 
@@ -12,7 +15,6 @@ const TodoScreen = ({navigation, route}:HomeTabScreenProps<'Todo'>) => {
       // const [tasks, setTasks] = useState<Task[]>([])
       // const dispatch = useAppDispatch();
       const tasks = useAppSelector(state => state.tasks.tasks)
-
 
       const handleAdd = () => {
             navigation.navigate('Add')

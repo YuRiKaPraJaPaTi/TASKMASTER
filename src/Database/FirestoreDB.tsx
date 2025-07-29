@@ -18,3 +18,61 @@ export const addTaskToFirestore = async (userID: string, task: Omit<Task, 'userI
   }
 };
 
+
+export const getTasksFromFirestore = (
+  userID: string,
+  callback: (tasks: Task[]) => void
+) => {
+  const unsubscribe = tasksCollection
+    .doc(userID)
+    .collection('tasks')
+    .onSnapshot(snapshot => {
+      const tasks: Task[] = snapshot.docs.map(doc => {
+        const data = doc.data();
+        return {
+          id: Number(doc.id),
+          title: data.title,
+          description: data.description,
+          date: data.date,
+          isChecked: data.isChecked ?? false,
+          userID: userID, 
+        };
+      });
+
+      callback(tasks); 
+    });
+
+  return unsubscribe;
+};
+
+
+
+
+// export const getTasksFromFirestore = async (userID: string): Promise<Task[]> => {
+//   try {
+//     const snapshot = await firestore()
+//       .collection('users')
+//       .doc(userID)
+//       .collection('tasks')
+//       .get();
+
+//     const tasks: Task[] = snapshot.docs.map(doc => {
+//       const data = doc.data();
+//       return {
+//         id: Number(doc.id), 
+//         title: data.title,
+//         description: data.description,
+//         date: data.date,
+//         isChecked: data.isChecked ?? false,
+//         userID: userID,  
+//       };
+//     });
+
+//     return tasks;
+//   } catch (error) {
+//     console.error(error);
+//     Alert.alert('Error fetching tasks');
+//     return [];
+//   }
+// };
+
