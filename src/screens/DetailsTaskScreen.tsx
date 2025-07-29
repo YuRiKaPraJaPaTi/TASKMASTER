@@ -6,21 +6,31 @@ import SocialIcon from '../components/SocialIcon';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useAppDispatch, useAppSelector} from '../redux/hooks';
 import { deleteTask } from '../redux/todoSlice';
+import { deleteTaskFromFirestore } from '../Database/FirestoreDB';
+import auth from '@react-native-firebase/auth';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'DetailsTask'>;
 
 const DetailsTaskScreen = ({navigation, route}:Props) => {
   const dispatch = useAppDispatch();
   const taskId = route.params.task.id;
+  const user = auth().currentUser;
 
   const task = useAppSelector((state) =>
     state.tasks.tasks.find((t) => t.id === taskId)
   );
 
-  const handleDelete = (id: number) => {
-    dispatch(deleteTask(id))
-    navigation.goBack()
-  }
+  // const handleDelete = (id: number) => {
+  //   // dispatch(deleteTask(id))
+  //   navigation.goBack()
+  // }
+
+  const handleDelete = (task: Task) => {
+    if (!user?.uid || !task.id) return
+    deleteTaskFromFirestore(user.uid, task.id.toString());
+    navigation.goBack();
+  };
+
 
   const handleEdit = () => {
     if (task)
@@ -36,7 +46,8 @@ const DetailsTaskScreen = ({navigation, route}:Props) => {
         <SocialIcon 
           source={require('../../assets/delete.png')}
           size={22}
-          onPress={()=>handleDelete(taskId)}
+          // onPress={()=>handleDelete(task)}
+          onPress={() => task && handleDelete(task)}
                                     
         />
       </View>

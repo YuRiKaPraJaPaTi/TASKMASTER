@@ -8,7 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import CheckBox from '@react-native-community/checkbox';
-
+import auth from '@react-native-firebase/auth';
+import { deleteTaskFromFirestore } from '../Database/FirestoreDB';
 
 type TaskItemNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Add'>;
 
@@ -21,11 +22,18 @@ interface TaskItemProps {
 const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
       const navigation = useNavigation<TaskItemNavigationProp>();
       const dispatch = useAppDispatch();
+      const user = auth().currentUser;
 
-      const handleDelete = (id: number) => {
+      // const handleDelete = (id: number) => {
                   // setTasks(prev => prev.filter(task => task.id !== id));
                   // dispatch(deleteTask(id))
-            };
+            // };
+      
+        const handleDelete = (task: Task) => {
+          if (!user?.uid || !task.id) return
+          deleteTaskFromFirestore(user.uid, task.id.toString());
+          
+        };
 
       const handleEdit = () => {
             navigation.navigate('Add', { taskToEdit: task });
@@ -35,9 +43,9 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
             // dispatch(toggleTaskCheck(task.id))
       };
 
-      const handleDetails = (task:Task) => {
-            navigation.navigate('DetailsTask', {task});
-      };
+      // const handleDetails = (task:Task) => {
+      //       navigation.navigate('DetailsTask', {task});
+      // };
 
   return (
     <View style={styles.outerContainer}>
@@ -62,7 +70,7 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
                         <SocialIcon 
                               source={require('../../assets/delete.png')}
                               size={22}
-                              onPress={()=>handleDelete(task.id)}
+                              onPress={()=>handleDelete(task)}
                               
                         />
                   </View>

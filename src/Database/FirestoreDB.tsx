@@ -65,4 +65,20 @@ export const editTaskInFirestore = async (userID: string, task: Task) => {
   }
 };
 
+export const deleteTaskFromFirestore = async (userID: string, taskID: string) => {
+  try {
+    await tasksCollection
+      .doc(userID)
+      .collection('tasks')
+      .doc(taskID) 
+      .delete();
+
+    Alert.alert('Task deleted successfully');
+  } catch (error) {
+    Alert.alert('Failed to delete task');
+    console.error(error);
+  }
+};
+
+
 
