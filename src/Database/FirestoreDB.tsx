@@ -93,5 +93,20 @@ export const toogleTaskStatusInFirestore = async (userID:string, taskID: string,
   }
 }
 
+export const saveUserProfile = async (userId: string, data: {
+  name: string;
+  phone: string;
+  address: string;
+  email: string;
+}) => {
+  await tasksCollection
+    .doc(userId)
+    .set(data, { merge: true });
+};
 
-
+export const getUserProfile = async (userId: string) => {
+  const doc = await tasksCollection
+    .doc(userId)
+    .get();
+  return doc.data() ;
+};

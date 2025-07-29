@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, ScrollView} from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert, TextInput, ScrollView, Button } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-
+import { getUserProfile, saveUserProfile } from '../../Database/FirestoreDB';
+import InputText from '../../components/InputText';
 
 const ProfileScreen = () => {
   const user = auth().currentUser;
@@ -9,6 +11,41 @@ const ProfileScreen = () => {
   const email = user?.email ?? 'No Email';
   const initial = email.charAt(0).toUpperCase();
 
+  const [form, setForm] = useState({
+    name: '',
+    phone: '',
+    address: '',
+    email: email, // Not editable
+  });
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const data = await getUserProfile(userId);
+      if (data) {
+        setForm({
+          name: data.name || '',
+          phone: data.phone || '',
+          address: data.address || '',
+          email: data.email || email,
+        });
+      }
+    };
+    if (userId) fetchProfile();
+  }, [userId]);
+
+  const handleChange = (field: keyof typeof form, value: string) => {
+    setForm(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSave = async () => {
+    const { name, phone, address } = form;
+    if (!name || !phone || !address) {
+      Alert.alert('Please fill in all fields');
+      return;
+    }
+    await saveUserProfile(userId, form);
+    Alert.alert('Profile saved successfully');
+  };
 
   const handleLogout = async () => {
     try {
@@ -32,19 +69,22 @@ const ProfileScreen = () => {
         </TouchableOpacity>
       </View>
 
-      {/* Form Section */}
       <ScrollView contentContainerStyle={styles.formContainer}>
         <Text style={{fontSize: 24, textAlign: 'center'}}>Profile View</Text>
 
         <Text style={styles.label}>Name</Text>
         <TextInput
           placeholder="Enter Name"
+          value={form.name}
+          onChangeText={(text) => handleChange('name', text)}
           style={styles.input}
         />
 
         <Text style={styles.label}>Phone Number</Text>
         <TextInput
           placeholder="Enter Phone"
+          value={form.phone}
+          onChangeText={(text) => handleChange('phone', text)}
           keyboardType="phone-pad"
           style={styles.input}
         />
@@ -52,12 +92,14 @@ const ProfileScreen = () => {
         <Text style={styles.label}>Address</Text>
         <TextInput
           placeholder="Enter Address"
+          value={form.address}
+          onChangeText={(text) => handleChange('address', text)}
           style={styles.input}
         />
 
-        <TouchableOpacity style={styles.saveButton}>
-      <Text style={styles.saveButtonText}>Save Profile</Text>
-    </TouchableOpacity>
+        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+          <Text style={styles.saveButtonText}>Save Profile</Text>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
@@ -73,13 +115,13 @@ const styles = StyleSheet.create({
   },
   navbar: {
     backgroundColor: '#4267B2',
-    paddingVertical: 30, // Add more padding for a better look
+    paddingVertical: 30, 
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
-    elevation: 5, // Add shadow for the navbar
+    elevation: 5, 
   },
 
   avatarContainer: {
@@ -100,7 +142,7 @@ const styles = StyleSheet.create({
   padding: 20,
   backgroundColor: '#fff',
   flexGrow: 1,
-},
+  },
 
   emailText: {
     fontSize: 18,
@@ -147,11 +189,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     backgroundColor: '#fff',
   },
-  disabled: {
-    backgroundColor: '#eee',
-    color: '#777',
-  },
-   saveButton: {
+  saveButton: {
     backgroundColor: '#4267B2',
     paddingVertical: 12,
     borderRadius: 10,
