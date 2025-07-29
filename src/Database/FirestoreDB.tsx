@@ -45,34 +45,24 @@ export const getTasksFromFirestore = (
   return unsubscribe;
 };
 
+export const editTaskInFirestore = async (userID: string, task: Task) => {
+  try {
+    await tasksCollection
+      .doc(userID)
+      .collection('tasks')
+      .doc(String(task.id))
+      .update({
+        title: task.title,
+        description: task.description,
+        date: task.date,
+        isChecked: task.isChecked,
+      });
 
+    Alert.alert('Task updated successfully');
+  } catch (error) {
+    Alert.alert('Failed to update task');
+    console.error(error);
+  }
+};
 
-
-// export const getTasksFromFirestore = async (userID: string): Promise<Task[]> => {
-//   try {
-//     const snapshot = await firestore()
-//       .collection('users')
-//       .doc(userID)
-//       .collection('tasks')
-//       .get();
-
-//     const tasks: Task[] = snapshot.docs.map(doc => {
-//       const data = doc.data();
-//       return {
-//         id: Number(doc.id), 
-//         title: data.title,
-//         description: data.description,
-//         date: data.date,
-//         isChecked: data.isChecked ?? false,
-//         userID: userID,  
-//       };
-//     });
-
-//     return tasks;
-//   } catch (error) {
-//     console.error(error);
-//     Alert.alert('Error fetching tasks');
-//     return [];
-//   }
-// };
 

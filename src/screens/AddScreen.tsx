@@ -11,7 +11,7 @@ import { RootState } from '../redux/store'
 import { useEffect } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import auth from '@react-native-firebase/auth';
-import { addTaskToFirestore } from '../Database/FirestoreDB';
+import { addTaskToFirestore, editTaskInFirestore } from '../Database/FirestoreDB';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Add'>;
 
@@ -53,6 +53,7 @@ const AddScreen = ({navigation, route}:Props) => {
 
             if (taskToEdit) {
                   // dispatch(editTask(task));
+                  editTaskInFirestore(user.uid, task);
                   
             } else {
                   // dispatch(addTask(task));
