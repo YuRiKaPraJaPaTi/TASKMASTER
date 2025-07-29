@@ -81,4 +81,16 @@ export const deleteTaskFromFirestore = async (userID: string, taskID: string) =>
 };
 
 
+export const toogleTaskStatusInFirestore = async (userID:string, taskID: string, newStatus: boolean) => {
+  try {
+    await tasksCollection
+      .doc(userID)
+      .collection('tasks')
+      .doc(taskID)
+      .update({isChecked: newStatus})
+  } catch (error) {
+    Alert.alert('error toggling task status')
+  }
+}
+
 

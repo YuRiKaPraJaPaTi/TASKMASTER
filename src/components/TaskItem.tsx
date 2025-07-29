@@ -9,7 +9,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
 import CheckBox from '@react-native-community/checkbox';
 import auth from '@react-native-firebase/auth';
-import { deleteTaskFromFirestore } from '../Database/FirestoreDB';
+import { deleteTaskFromFirestore, toogleTaskStatusInFirestore } from '../Database/FirestoreDB';
 
 type TaskItemNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Add'>;
 
@@ -39,8 +39,10 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
             navigation.navigate('Add', { taskToEdit: task });
       };
 
-      const handleToggleCheck = () => {
+      const handleToggleCheck = async (task: Task,newStatus: boolean) => {
             // dispatch(toggleTaskCheck(task.id))
+            if (!user?.uid || !task.id) return;
+            await toogleTaskStatusInFirestore(user.uid,task.id.toString(), newStatus )
       };
 
       // const handleDetails = (task:Task) => {
@@ -51,7 +53,15 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
     <View style={styles.outerContainer}>
             <View style={styles.taskItem}>
             
-                  <CheckBox value={task.isChecked} onValueChange={handleToggleCheck}/>
+                  <CheckBox value={task.isChecked} 
+                        // onValueChange={handleToggleCheck}
+                         onValueChange={(newValue) => {console.log("Toggled checkbox:", newValue) 
+                         handleToggleCheck(task, newValue)}}
+                  />
+                         {/* <TouchableOpacity onPress={() => handleToggleCheck(task, !task.isChecked)}>
+                              <Text>{task.isChecked ? '☑️' : '⬜️'} </Text>
+                              </TouchableOpacity> */}
+
                   
                   <View style={styles.textContainer}>
                         <Text style={styles.title}>{task.title}</Text>

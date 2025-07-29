@@ -13,7 +13,7 @@ import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 
 const TodoScreen = ({navigation, route}:HomeTabScreenProps<'Todo'>) => {
       // const [tasks, setTasks] = useState<Task[]>([])
-      // const dispatch = useAppDispatch();
+      const dispatch = useAppDispatch();
       const tasks = useAppSelector(state => state.tasks.tasks)
 
       const handleAdd = () => {
