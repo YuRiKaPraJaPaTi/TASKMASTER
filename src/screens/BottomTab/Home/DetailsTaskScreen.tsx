@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList, Task } from '../navigation/types';
-import SocialIcon from '../components/SocialIcon';
+import { RootStackParamList, Task } from '../../../navigation/types';
+import SocialIcon from '../../../components/SocialIcon';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { useAppDispatch, useAppSelector} from '../redux/hooks';
-import { deleteTask } from '../redux/todoSlice';
-import { deleteTaskFromFirestore } from '../Database/FirestoreDB';
+import { useAppDispatch, useAppSelector} from '../../../redux/hooks';
+import { deleteTask } from '../../../redux/todoSlice';
+import { deleteTaskFromFirestore } from '../../../Database/FirestoreDB';
 import auth from '@react-native-firebase/auth';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'DetailsTask'>;
@@ -44,7 +44,7 @@ const DetailsTaskScreen = ({navigation, route}:Props) => {
         
         <Icon name='edit' size={22} onPress={handleEdit}/>
         <SocialIcon 
-          source={require('../../assets/delete.png')}
+          source={require('../../../../assets/delete.png')}
           size={22}
           // onPress={()=>handleDelete(task)}
           onPress={() => task && handleDelete(task)}

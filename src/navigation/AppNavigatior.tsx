@@ -9,8 +9,8 @@
 import { StatusBar, StyleSheet, useColorScheme, View, Text } from 'react-native';
 import { getFocusedRouteNameFromRoute, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AddScreen from '../screens/AddScreen';
-import DetailsTaskScreen from '../screens/DetailsTaskScreen';
+import AddScreen from '../screens/BottomTab/Home/AddScreen';
+import DetailsTaskScreen from '../screens/BottomTab/Home/DetailsTaskScreen';
 import { RootStackParamList } from './types';
 import BottomTabNavigator from './BottomTabNavigator';
 import 'react-native-gesture-handler';

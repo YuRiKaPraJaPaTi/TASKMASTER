@@ -1,8 +1,8 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { DrawerHistoryParamList } from './types';
-import AllTaskScreen from '../screens/AllTaskScreen';
-import ActiveTaskScreen from '../screens/ActiveTaskScreen';
-import CompletedTaskScreen from '../screens/CompletedTaskScreen';
+import AllTaskScreen from '../screens/TopTab/AllTaskScreen';
+import ActiveTaskScreen from '../screens/TopTab/ActiveTaskScreen';
+import CompletedTaskScreen from '../screens/TopTab/CompletedTaskScreen';
 import AppNavigator from './AppNavigatior';
 
 const Drawer = createDrawerNavigator<DrawerHistoryParamList>();

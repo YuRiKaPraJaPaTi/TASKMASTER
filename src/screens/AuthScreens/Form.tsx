@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert } from 'react-native';
 import { ActivityIndicator } from 'react-native';
-import InputText from '../components/InputText';
-import SocialIcon from '../components/SocialIcon';
+import InputText from '../../components/InputText';
+import SocialIcon from '../../components/SocialIcon';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
-import { onGoogleButtonPress } from './Google/GoogleSignInService';
+import { onGoogleButtonPress } from '../../Services/Google/GoogleSignInService';
 
 // Type for Form Values
 interface FormProps {
@@ -116,7 +116,7 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
             {showUsernameField && (
               <InputText
                 placeholder="Username"
-                iconSource={require('../../assets/username.png')}
+                iconSource={require('../../../assets/username.png')}
                 value={form.username!}
                 onChangeText={(text) => setForm({ ...form, username: text })}
                 style={[styles.input, externalErrors?.username && styles.errorBorder]}
@@ -126,7 +126,7 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
             
 
             <InputText
-              iconSource={require('../../assets/email.png')}
+              iconSource={require('../../../assets/email.png')}
               placeholder="email"
               value={form.email}
               onChangeText={handleEmailChange}
@@ -137,7 +137,7 @@ const Form = ({ title, buttonLabel, showUsernameField, onSubmit, onToggleForm, l
             )}
 
             <InputText
-              iconSource={require('../../assets/password.png')}
+              iconSource={require('../../../assets/password.png')}
               placeholder="password"
               value={form.password}
               onChangeText={handlePasswordChange}

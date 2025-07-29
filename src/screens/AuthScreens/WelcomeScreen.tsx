@@ -2,9 +2,9 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { AuthStackParamList } from '../navigation/types';
+import { AuthStackParamList } from '../../navigation/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import MyImageBackground from '../components/MyImageBackground';
+import MyImageBackground from '../../components/MyImageBackground';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Welcome'>;
 
@@ -20,7 +20,7 @@ export default function WelcomeScreen({navigation}:Props) {
   }, [navigation]);
 
   return (
-      <MyImageBackground source={require('../../assets/backgroundImage.jpg')}>
+      <MyImageBackground source={require('../../../assets/backgroundImage.jpg')}>
             <Text style={styles.text}>Welcome</Text>
       </MyImageBackground>
 

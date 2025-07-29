@@ -2,9 +2,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createMaterialTopTabNavigator, MaterialTopTabBar } from '@react-navigation/material-top-tabs'
 import { TopHistoryTabParamList } from './types'
-import AllTaskScreen from '../screens/AllTaskScreen'
-import ActiveTaskScreen from '../screens/ActiveTaskScreen'
-import CompletedTaskScreen from '../screens/CompletedTaskScreen'
+import AllTaskScreen from '../screens/TopTab/AllTaskScreen'
+import ActiveTaskScreen from '../screens/TopTab/ActiveTaskScreen'
+import CompletedTaskScreen from '../screens/TopTab/CompletedTaskScreen'
 
 const TopTab = createMaterialTopTabNavigator<TopHistoryTabParamList>();
 

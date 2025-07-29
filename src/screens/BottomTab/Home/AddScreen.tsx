@@ -1,17 +1,17 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import MyTextInput from '../components/MyTextInput'
-import MyButton from '../components/MyButton'
+import MyTextInput from '../../../components/MyTextInput'
+import MyButton from '../../../components/MyButton'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList, Task } from '../navigation/types';
-import { useAppDispatch, useAppSelector } from '../redux/hooks'
-import { addTask, clearForm, updateForm, editTask } from '../redux/todoSlice'
+import { RootStackParamList, Task } from '../../../navigation/types';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { addTask, clearForm, updateForm, editTask } from '../../../redux/todoSlice'
 import { useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
+import { RootState } from '../../../redux/store'
 import { useEffect } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import auth from '@react-native-firebase/auth';
-import { addTaskToFirestore, editTaskInFirestore } from '../Database/FirestoreDB';
+import { addTaskToFirestore, editTaskInFirestore } from '../../../Database/FirestoreDB';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Add'>;
 

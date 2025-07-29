@@ -4,7 +4,7 @@ import { Alert, StyleSheet } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import auth from '@react-native-firebase/auth';
 import Form, { FormValues } from './Form';
-import { AuthStackParamList } from '../navigation/types';
+import { AuthStackParamList } from '../../navigation/types';
 
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'Login'> & {

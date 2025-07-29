@@ -1,9 +1,9 @@
 // AuthStack.tsx
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from '../screens/LoginScreen';
-import SignupScreen from '../screens/SignupScreen';
+import LoginScreen from '../screens/AuthScreens/LoginScreen';
+import SignupScreen from '../screens/AuthScreens/SignupScreen';
 import { AuthStackParamList } from './types';
-import WelcomeScreen from '../screens/WelcomeScreen';
+import WelcomeScreen from '../screens/AuthScreens/WelcomeScreen';
 
 
 
