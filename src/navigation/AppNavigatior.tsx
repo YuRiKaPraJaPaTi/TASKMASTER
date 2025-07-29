@@ -37,6 +37,8 @@ function AppNavigator() {
                 title: routeName        
                 };
               }}
+            // options={{headerShown: false}}
+            
             />
 
             {/* <Stack.Screen 

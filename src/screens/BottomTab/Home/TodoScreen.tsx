@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
       },
       top: {
             flex:1,
-            backgroundColor: 'skyblue',
+            backgroundColor: '#4267B2',
       },
       bottom: {
             flex:2,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
             width: 60,
             height: 60,
             position: 'absolute',
-            backgroundColor: 'skyblue',
+            backgroundColor: '#4267B2',
             justifyContent: 'center',
             alignItems: 'center',
             left: 300,

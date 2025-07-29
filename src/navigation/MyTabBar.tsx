@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
             backgroundColor: '#ddd',
       },
       activeTabBox: {
-            backgroundColor: '#4A90E2', 
+            backgroundColor: '#4267B2', 
       },
       tabLabel: {
             color: '#555',
