@@ -24,7 +24,7 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
 
       const handleDelete = (id: number) => {
                   // setTasks(prev => prev.filter(task => task.id !== id));
-                  dispatch(deleteTask(id))
+                  // dispatch(deleteTask(id))
             };
 
       const handleEdit = () => {
@@ -32,7 +32,7 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
       };
 
       const handleToggleCheck = () => {
-            dispatch(toggleTaskCheck(task.id))
+            // dispatch(toggleTaskCheck(task.id))
       };
 
       const handleDetails = (task:Task) => {

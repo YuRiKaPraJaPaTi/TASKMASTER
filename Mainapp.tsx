@@ -20,6 +20,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthStack from './src/navigation/AuthStack';
 import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
+import { loadTasksFromFirestore } from './src/redux/middleware/todoThunks';
 
 
 
@@ -28,6 +29,22 @@ function Mainapp() {
   const [initializing, setInitializing] = useState(true);
   const dispatch = useAppDispatch();
   const tasks = useAppSelector((state: RootState) => state.tasks.tasks)
+//   const auth = getAuth();
+//   const user = auth.currentUser;
+//   const userId = user?.uid;
+
+
+// useEffect(() => {
+//   const auth = getAuth();
+//   const user = auth.currentUser;
+//   const userId = user?.uid;
+
+//   if (userId) {
+//     dispatch(loadTasksFromFirestore(userId));
+//   }
+// }, []);
+
+
 
   // useEffect(() => {
   //   const loadTasks = async () => {
@@ -37,6 +54,8 @@ function Mainapp() {
 
   //   loadTasks()
   // }, [dispatch])
+
+  
 
   // useEffect(() => {
   //   storeTaskToStorage(tasks);
