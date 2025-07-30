@@ -5,7 +5,7 @@
  * @format
  */
 
-import { StatusBar, StyleSheet, useColorScheme, View, Text } from 'react-native';
+import { StatusBar, StyleSheet, useColorScheme, View, Text, Platform, PermissionsAndroid, Alert } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppNavigator from './src/navigation/AppNavigatior';
 import { Provider } from 'react-redux';
@@ -22,26 +22,53 @@ import messaging from '@react-native-firebase/messaging';
 
 function App() {
 
-  async function requestUserPermission() {
-  const authStatus = await messaging().requestPermission();
-  const enabled =
-    authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-    authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+  const requestNotificationPermission = async () => {
+    if (Platform.OS === 'android' && Platform.Version >= 33) {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS
+      );
 
-  if (enabled) {
-    console.log('Authorization status:', authStatus);
-  }
-}
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('Notification permission granted');
+      } else {
+        console.log('Notification permission denied');
+        Alert.alert(
+          'Permission Required',
+          'Please allow notifications to stay updated.'
+        );
+      }
+    } else {
+      // iOS or older Android versions
+      const authStatus = await messaging().requestPermission();
+      const enabled =
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-const getToken = async()=> {
-  const token = await messaging().getToken()
-  console.log("token: ", token)
-}
+      if (enabled) {
+        console.log('iOS/older Android permission granted');
+      }
+    }
+  };
 
-useEffect(()=>{
-  requestUserPermission()
-  getToken()
-},[])
+  const getFCMToken = async () => {
+    const token = await messaging().getToken();
+    console.log('FCM Token:', token);
+  };
+
+  useEffect(() => {
+    requestNotificationPermission();
+    getFCMToken();
+
+    // Foreground message listener
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      // console.log('Received foreground message:', remoteMessage);
+      Alert.alert('New Notification', remoteMessage.notification?.title || 'You have a new notification!');
+    });
+
+    return unsubscribe; 
+  
+  }, []);
   
   return (
     <Provider store={store}>
