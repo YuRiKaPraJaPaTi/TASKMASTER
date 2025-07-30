@@ -27,6 +27,7 @@ export type RootStackParamList = {
   DetailsTask: {
     task: Task;
   };
+  AccountDetails: undefined;
 };
 
 export type BottomTabParamList = {

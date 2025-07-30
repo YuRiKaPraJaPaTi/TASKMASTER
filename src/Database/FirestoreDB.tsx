@@ -110,3 +110,17 @@ export const getUserProfile = async (userId: string) => {
     .get();
   return doc.data() ;
 };
+
+
+export const fetchUserProfile = async (
+  userId: string,
+  fallbackEmail: string
+) => {
+  const data = await getUserProfile(userId);
+  return {
+    name: data?.name || '',
+    phone: data?.phone || '',
+    address: data?.address || '',
+    email: data?.email || fallbackEmail,
+  };
+};

@@ -16,6 +16,7 @@ import BottomTabNavigator from './BottomTabNavigator';
 import 'react-native-gesture-handler';
 import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 import { useEffect, useState } from 'react';
+import AccountDetailScreen from '../screens/BottomTab/Profile/AccountDetailScreen';
 
 
 
@@ -57,6 +58,7 @@ function AppNavigator() {
               >
               <Stack.Screen name="Add" component={AddScreen} options={{headerShown: false}}/>
               <Stack.Screen name="DetailsTask" component={DetailsTaskScreen} />
+              <Stack.Screen name='AccountDetails' component={AccountDetailScreen} />
             </Stack.Group>
 
             

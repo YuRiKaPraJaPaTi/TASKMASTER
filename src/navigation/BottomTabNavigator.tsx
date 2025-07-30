@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
 import React from 'react'
 import TodoScreen from '../screens/BottomTab/Home/TodoScreen'
-import ProfileScreen from '../screens/BottomTab/ProfileScreen'
+import ProfileScreen from '../screens/BottomTab/Profile/ProfileScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { BottomTabParamList } from './types'
 import HistoryScreen from '../screens/TopTab/CompletedTaskScreen'
