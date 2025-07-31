@@ -23,7 +23,7 @@ import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 import { getTasksFromFirestore } from './src/Database/FirestoreDB';
 import { navigationRef } from './src/navigation/NavigatioRef';
 import { getFCMToken, requestNotificationPermission } from './src/Services/Notification/FCMtoken';
-import { setupForegroundNotificationListener } from './src/Services/Notification/NotificationService';
+import { setupForegroundNotificationListener, setupNotificationEvents } from './src/Services/Notification/NotificationService';
 
 
 
@@ -94,9 +94,8 @@ function Mainapp() {
     requestNotificationPermission();
     getFCMToken(userID); 
     setupForegroundNotificationListener(); 
+    setupNotificationEvents(); 
     
-    
-
     listenersSet.current = true;
   }, [userID]);
 

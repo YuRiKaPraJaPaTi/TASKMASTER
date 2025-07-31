@@ -20,7 +20,33 @@ export async function setupForegroundNotificationListener() {
       });
 }
 
+// Setup Notification Click Event
+export const setupNotificationEvents = () => {
+      createNotificationChannel();
 
+      notifee.onForegroundEvent(({ type, detail }) => {
+            if (type === EventType.PRESS) {
+                        navigationRef.current?.navigate('Tabs', {
+                        screen: 'Profile',  
+                        });
+            }
+      });
+
+
+      //   Background Notification Listener
+      messaging().setBackgroundMessageHandler(async remoteMessage => {
+      //     console.log('Message handled in the background!', remoteMessage);
+            if (remoteMessage?.notification) {
+                  navigationRef.navigate('Tabs', {
+                        screen: 'History',
+                              params: {
+                              screen: 'All',
+                              },
+                        }
+                  );
+            }
+      });
+}
 
 
 
