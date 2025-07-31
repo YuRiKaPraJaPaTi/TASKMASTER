@@ -11,7 +11,7 @@ import AppNavigator from './src/navigation/AppNavigatior';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import DrawerNavigation from './src/navigation/DrawerNavigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './src/redux/hooks';
 import { setTasks } from './src/redux/todoSlice';
 import { getTasksFromStorage, storeTaskToStorage } from './src/redux/storage';
@@ -21,7 +21,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import AuthStack from './src/navigation/AuthStack';
 import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 import { getTasksFromFirestore } from './src/Database/FirestoreDB';
-
+import { navigationRef } from './src/navigation/NavigatioRef';
+import { getFCMToken, requestNotificationPermission } from './src/Services/Notification/FCMtoken';
+import { setupForegroundNotificationListener } from './src/Services/Notification/NotificationService';
 
 
 
@@ -34,8 +36,10 @@ function Mainapp() {
   const user = auth.currentUser;
   const userID = user?.uid;
 
+  // Fetch tasks from Firestore when user logs in
   useEffect(() => {
     if (!userID) return;
+
     const unsubscribe = getTasksFromFirestore(userID, tasks => {
     dispatch(setTasks(tasks));
   });
@@ -71,7 +75,8 @@ function Mainapp() {
   //   storeTaskToStorage(tasks);
   // }, [tasks]);
 
-   useEffect(() => {
+  // Handle authentication state
+  useEffect(() => {
     const subscriber = onAuthStateChanged(getAuth(), user => {
       setIsLoggedIn(!!user);
       if (initializing) setInitializing(false);
@@ -80,15 +85,28 @@ function Mainapp() {
     return subscriber; // unsubscribe on unmount
   }, []);
 
-  if (initializing) return null;
-
   
+
+  // Set up notifications when the user is logged in
+  const listenersSet = useRef(false);
+  useEffect(() => {
+    if (!userID || listenersSet.current) return;
+    requestNotificationPermission();
+    getFCMToken(userID); 
+    setupForegroundNotificationListener(); 
+    
+    
+
+    listenersSet.current = true;
+  }, [userID]);
+
+  if (initializing) return null;
   return (
    
       
     <GestureHandlerRootView style={{flex:1}}>
 
-      <NavigationContainer>
+      <NavigationContainer ref={navigationRef}>
         {/* <DrawerNavigation /> */}
         {/* <AppNavigator /> */}
         
