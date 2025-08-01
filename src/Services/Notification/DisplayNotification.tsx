@@ -1,6 +1,8 @@
 
-import notifee, { AndroidImportance } from '@notifee/react-native';
+import { AndroidImportance } from '@notifee/react-native';
+import notifee, { TriggerType } from '@notifee/react-native';
 import { Task } from '../../navigation/types';
+import messaging from '@react-native-firebase/messaging';
 
 
 const NOTIFICATION_CHANNEL_ID = 'important';
@@ -48,19 +50,27 @@ export const createNotificationChannel = () => {
 //   });
 // };
 
-//display immediate notification after task added
-export const showImmediateNotification = async (task: Task) => {
-  await notifee.displayNotification({
-    title: 'New Task Added',
-    body: task.title,
-    android: {
-      channelId: 'important',
-      pressAction: {
-        id: 'default',
-      },
-    },
-    data: {
-      taskId: task.id.toString(),
-    },
-  });
-};
+
+// // Setup Foreground Notification Listener
+// export async function setupForegroundNotificationListener() {
+//       messaging().onMessage(async remoteMessage => {
+//             if (remoteMessage?.notification) {
+//                   await notifee.displayNotification({
+//                   title: remoteMessage.notification.title,
+//                   body: remoteMessage.notification.body,
+//                   android: {
+//                   channelId: 'default',
+//                   importance: AndroidImportance.HIGH,
+//                   },
+//                   data: remoteMessage.data,
+//                   });
+//             }
+//       });
+// }
+
+
+
+
+
+
+
