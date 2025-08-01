@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
 import { TextInput } from 'react-native';
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 
 type TextInputProps = {
       label: string;
@@ -9,18 +10,77 @@ type TextInputProps = {
 }
 
 const MyTextInput = ({label, value, onChangeText}:TextInputProps) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.labels}>{label}</Text>
-      <View style={styles.inputContainer}>
-            <TextInput 
-            style={styles.input} 
-            value={value}
-            onChangeText={onChangeText}
-            />
-      </View>
-    </View>
-  )
+      const [showPicker, setShowPicker] = useState(false);
+      const [mode, setMode] = useState<'date' | 'time'>('date');
+      const [tempDate, setTempDate] = useState<Date>(new Date());
+
+      const openDatePicker = () => {
+            setMode('date');
+            setShowPicker(true);
+      };
+
+      const handleDateChange = (event: DateTimePickerEvent, selected?: Date) => {
+            if (event.type === 'dismissed') {
+                  setShowPicker(false);
+                  return;
+            }
+
+            if (selected) {
+                  if (mode === 'date') {
+                        setTempDate(selected);
+                        setMode('time');
+                        setShowPicker(true);
+                  } else {
+                        setShowPicker(false);
+                        const finalDate = new Date(
+                        tempDate.getFullYear(),
+                        tempDate.getMonth(),
+                        tempDate.getDate(),
+                        selected.getHours(),
+                        selected.getMinutes()
+                        );
+
+                        // Format to 'YYYY-MM-DD HH:mm'
+                        const yyyy = finalDate.getFullYear();
+                        const mm = String(finalDate.getMonth() + 1).padStart(2, '0');
+                        const dd = String(finalDate.getDate()).padStart(2, '0');
+                        const hh = String(finalDate.getHours()).padStart(2, '0');
+                        const min = String(finalDate.getMinutes()).padStart(2, '0');
+
+                        const formatted = `${yyyy}-${mm}-${dd} ${hh}:${min}`;
+                        onChangeText?.(formatted); //returns string
+                  }
+            }
+      };
+
+      return (
+            <View style={styles.container}>
+                  <Text style={styles.labels}>{label}</Text>
+                  <View style={styles.inputContainer}>
+                        {label.toLowerCase() === 'date' ? (
+                              <TouchableOpacity style={{ flex: 1 }} onPress={openDatePicker}>
+                                    <Text style={styles.dateText}>{value || 'Select Date'}</Text>
+                              </TouchableOpacity>
+                        ) : (
+                              <TextInput 
+                              style={styles.input} 
+                              value={value}
+                              onChangeText={onChangeText}
+                              />
+                         )}
+                  </View>
+                  {showPicker && (
+                        <DateTimePicker
+                        value={tempDate}
+                        mode={mode} 
+                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        onChange={handleDateChange}
+                        />
+                        )
+                  }
+
+            </View>
+      )
 }
 
 export default MyTextInput
@@ -32,7 +92,7 @@ const styles = StyleSheet.create({
       },
       labels: {
             fontSize:16,
-            color:'red',
+            color:'white',
             paddingBottom: 5,
             alignSelf: 'center',
       },
@@ -59,9 +119,10 @@ const styles = StyleSheet.create({
             // borderColor: 'red',
             borderRadius: 5,
             // padding: 10,
-      
-      
-
-
-      }
+      },
+      dateText: {
+            paddingVertical: 13,
+            paddingHorizontal: 10,
+            color: '#333',
+      },
 })

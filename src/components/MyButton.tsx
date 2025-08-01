@@ -22,7 +22,7 @@ export default MyButton
 const styles = StyleSheet.create({
       mybutton: {
             margin: 10,
-            backgroundColor: 'purple',
+            backgroundColor: 'black',
             height: 50,
             width: 100,
             justifyContent: 'center',

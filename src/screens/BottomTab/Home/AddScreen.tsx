@@ -98,12 +98,13 @@ export default AddScreen
 const styles = StyleSheet.create({
       container: {
             flex:1,
-            backgroundColor: 'skyblue',
+            backgroundColor: '#4267B2',
       },
       heading: {
             fontSize: 32,
             alignSelf: 'center',
             padding: 10,
+            color: 'white',
             // backgroundColor: 'green',
       },
       textInputContainer: {
