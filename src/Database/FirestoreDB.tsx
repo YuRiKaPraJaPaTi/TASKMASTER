@@ -1,18 +1,22 @@
 import firestore from "@react-native-firebase/firestore";
 import { Task } from "../navigation/types";
 import { Alert } from "react-native";
+import notifee from '@notifee/react-native';
+import { showImmediateNotification } from "../Services/Notification/DisplayNotification";
 
 const tasksCollection = firestore().collection('Users')
 
 export const addTaskToFirestore = async (userID: string, task: Omit<Task, 'userID'>) => {
   try {
+    const taskWithUserID = { ...task, userID };
     await tasksCollection
       .doc(userID)
       .collection('tasks')
       .doc(String(task.id))
       .set(task)
 
-      Alert.alert('task saved to firestore')
+    showImmediateNotification(taskWithUserID)
+      
   } catch (error) {
     Alert.alert('failed to save task')
   }

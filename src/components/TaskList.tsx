@@ -5,7 +5,7 @@ import TaskItem from './TaskItem'
 
 type TaskListProps = {
       tasks: Task[];
-      onPressDetails: (task:Task) => void;
+      onPressDetails: (taskId: number) => void;
 }
 
 const TaskList = ({tasks, onPressDetails}:TaskListProps) => {
@@ -15,7 +15,7 @@ const TaskList = ({tasks, onPressDetails}:TaskListProps) => {
                   data={tasks}
                   keyExtractor={item => item.id.toString()}
                   renderItem={({ item }) => (
-                  <TaskItem task={item} onPressDetails={()=>onPressDetails(item)}
+                  <TaskItem task={item} onPressDetails={()=>onPressDetails(item.id)}
                   />
                   
                   )}

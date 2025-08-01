@@ -25,8 +25,8 @@ const TodoScreen = ({navigation, route}:HomeTabScreenProps<'Todo'>) => {
             // });
       };
 
-      const handleDetails = (task:Task) => {
-            navigation.navigate('DetailsTask', {task});
+      const handleDetails = (taskId: number) => {
+            navigation.navigate('DetailsTask', {taskId});
       };
 
       return (

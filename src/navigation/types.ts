@@ -25,7 +25,7 @@ export type RootStackParamList = {
   Tabs:NavigatorScreenParams<BottomTabParamList> ;
   Add: {taskToEdit?: Task} | undefined
   DetailsTask: {
-    task: Task;
+    taskId: number;
   };
   AccountDetails: undefined;
 };

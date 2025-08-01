@@ -13,7 +13,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'DetailsTask'>;
 
 const DetailsTaskScreen = ({navigation, route}:Props) => {
   const dispatch = useAppDispatch();
-  const taskId = route.params.task.id;
+  const taskId = route.params.taskId;
   const user = auth().currentUser;
 
   const task = useAppSelector((state) =>
