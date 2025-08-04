@@ -12,7 +12,7 @@ type TextInputProps = {
 const MyTextInput = ({label, value, onChangeText}:TextInputProps) => {
       const [showPicker, setShowPicker] = useState(false);
       const [mode, setMode] = useState<'date' | 'time'>('date');
-      const [tempDate, setTempDate] = useState<Date>(new Date());
+      const [tempDate, setTempDate] = useState(new Date());
 
       const openDatePicker = () => {
             setMode('date');
@@ -49,6 +49,8 @@ const MyTextInput = ({label, value, onChangeText}:TextInputProps) => {
 
                         const formatted = `${yyyy}-${mm}-${dd} ${hh}:${min}`;
                         onChangeText?.(formatted); //returns string
+                        
+
                   }
             }
       };
@@ -73,7 +75,7 @@ const MyTextInput = ({label, value, onChangeText}:TextInputProps) => {
                         <DateTimePicker
                         value={tempDate}
                         mode={mode} 
-                        display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                        display={Platform.OS === 'android' ? 'spinner' : 'default'}
                         onChange={handleDateChange}
                         />
                         )

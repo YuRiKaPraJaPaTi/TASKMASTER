@@ -1,17 +1,15 @@
-
-import { AndroidImportance } from '@notifee/react-native';
-import notifee, { TriggerType } from '@notifee/react-native';
-import { Task } from '../../navigation/types';
+import notifee, { AndroidImportance } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
+import { navigationRef } from '../../navigation/NavigatioRef';
 
 
 const NOTIFICATION_CHANNEL_ID = 'important';
 let isChannelCreated = false;
 
-// Create the notification channel once
-export const createNotificationChannel = () => {
+// 1. Create Notification Channel
+export const createNotificationChannel = async () => {
   if (!isChannelCreated) {
-    notifee.createChannel({
+    await notifee.createChannel({
       id: NOTIFICATION_CHANNEL_ID,
       name: 'Important Notification',
       importance: AndroidImportance.HIGH,
@@ -20,57 +18,57 @@ export const createNotificationChannel = () => {
   }
 };
 
-// // Display Notification
-// export const displayNotification = (remoteMessage: { notification: { title?: string, body?: string }, data: any }) => {
- 
-//   createNotificationChannel();
+// 2. Display Notification Helper
+const displayNotification = async (remoteMessage: any) => {
+  const { title, body } = remoteMessage.notification || {};
+  const { taskId } = remoteMessage.data || {};
 
-//   notifee.displayNotification({
-//     title: remoteMessage.notification?.title || 'New Notification',
-//     body: remoteMessage.notification?.body || '',
-//     android: {
-//       channelId: NOTIFICATION_CHANNEL_ID,
-//       smallIcon: 'ic_launcher', 
-//         color: '#4caf50',
-//       // actions: [
-//       //   {
-//       //     title: '<b>Dance</b> &#128111;',
-//       //     pressAction: { id: 'dance' },
-//       //   },
-//       //   {
-//       //     title: '<p style="color: #f44336;"><b>Cry</b> &#128557;</p>',
-//       //     pressAction: { id: 'cry' },
-//       //   },
-//       // ],
-//       pressAction: {
-//         id: 'default',
-//       },
-//     },
-//     data: remoteMessage.data,  
-//   });
-// };
+  await notifee.displayNotification({
+    title: title || 'New Notification',
+    body: body || '',
+    android: {
+      channelId: NOTIFICATION_CHANNEL_ID,
+      importance: AndroidImportance.HIGH,
+      pressAction: {
+        id: 'default', // required to trigger onPress
+      },
+    },
+    data: remoteMessage.data,
+  });
 
+  if (taskId && navigationRef.current) {
+    navigationRef.current.navigate('DetailsTask', { taskId: Number(taskId) });
+  }
+};
 
-// // Setup Foreground Notification Listener
-// export async function setupForegroundNotificationListener() {
-//       messaging().onMessage(async remoteMessage => {
-//             if (remoteMessage?.notification) {
-//                   await notifee.displayNotification({
-//                   title: remoteMessage.notification.title,
-//                   body: remoteMessage.notification.body,
-//                   android: {
-//                   channelId: 'default',
-//                   importance: AndroidImportance.HIGH,
-//                   },
-//                   data: remoteMessage.data,
-//                   });
-//             }
-//       });
-// }
+export const setupForegroundNotificationListener = () => {
+  messaging().onMessage(async remoteMessage => {
+    await displayNotification(remoteMessage);
+  });
+};
 
+export const setupBackgroundNotificationListener = () => {
+  messaging().setBackgroundMessageHandler(async remoteMessage => {
+    await displayNotification(remoteMessage);
+  });
+};
 
+// 3. Handle Notification Taps (from background/quit state)
+export const onNotificationOpenedApp = () => {
+  messaging().onNotificationOpenedApp(remoteMessage => {
+    const taskId = remoteMessage?.data?.taskId;
+    if (taskId) {
+      navigationRef.current?.navigate('DetailsTask', { taskId: Number(taskId) });
+    }
+  });
 
-
-
-
-
+  // Handle if the app was launched by tapping a notification (cold start)
+  messaging()
+    .getInitialNotification()
+    .then(remoteMessage => {
+      const taskId = remoteMessage?.data?.taskId;
+      if (taskId) {
+        navigationRef.current?.navigate('DetailsTask', { taskId: Number(taskId) });
+      }
+    });
+}; 

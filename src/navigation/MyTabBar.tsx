@@ -67,15 +67,15 @@ const styles = StyleSheet.create({
       tabContainer: {
             flexDirection: 'row',
             height: 60,
-            backgroundColor: '#eee',
+            backgroundColor: '#F0F8FF',
             borderTopWidth: 1,
-            borderTopColor: '#ccc',
+            borderTopColor: 'blue',
       },
       tabBox: {
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#ddd',
+            backgroundColor: '#F0F8FF',
       },
       activeTabBox: {
             backgroundColor: '#4267B2', 

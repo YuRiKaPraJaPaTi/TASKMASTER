@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Task } from '../navigation/types'
-import SocialIcon from './SocialIcon'
-import { useAppDispatch } from '../redux/hooks';
-import { deleteTask, toggleTaskCheck } from '../redux/todoSlice';
+import { Task } from '../../../../navigation/types'
+import SocialIcon from '../../../../components/SocialIcon'
+import { useAppDispatch } from '../../../../redux/hooks';
+import { deleteTask, toggleTaskCheck } from '../../../../redux/todoSlice';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../navigation/types';
+import { RootStackParamList } from '../../../../navigation/types';
 import CheckBox from '@react-native-community/checkbox';
 import auth from '@react-native-firebase/auth';
-import { deleteTaskFromFirestore, toogleTaskStatusInFirestore } from '../Database/FirestoreDB';
+import { deleteTaskFromFirestore, toogleTaskStatusInFirestore } from '../../../../Database/FirestoreDB';
 
 type TaskItemNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Add'>;
 
@@ -73,12 +73,12 @@ const TaskItem = ({task, onPressDetails}:TaskItemProps) => {
 
                   <View style={styles.iconContainer}>
                         <SocialIcon 
-                              source={require('../../assets/edit.png')}
+                              source={require('../../../../../assets/edit.png')}
                               size={22}
                               onPress={handleEdit}
                         />
                         <SocialIcon 
-                              source={require('../../assets/delete.png')}
+                              source={require('../../../../../assets/delete.png')}
                               size={22}
                               onPress={()=>handleDelete(task)}
                               
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
       taskItem: {
             flexDirection: 'row',
             // backgroundColor: 'red',
-            backgroundColor: 'rgba(166, 140, 140, 0.4)',
+            backgroundColor: 'rgba(163, 192, 205, 0.4)',
             padding: 15,
             borderRadius: 12,
             marginBottom: 10,

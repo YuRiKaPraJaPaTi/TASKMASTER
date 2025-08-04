@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Task } from '../navigation/types'
+import { Task } from '../../../../navigation/types'
 import TaskItem from './TaskItem'
 
 type TaskListProps = {
@@ -19,6 +19,7 @@ const TaskList = ({tasks, onPressDetails}:TaskListProps) => {
                   />
                   
                   )}
+                  contentContainerStyle={{ paddingBottom: 100 }}
             />
     </View>
   )

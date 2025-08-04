@@ -3,6 +3,7 @@ import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import AuthStack from "./AuthStack";
+import { DrawerScreenProps } from "@react-navigation/drawer";
 
 export type Task = {
   id: number;
@@ -53,11 +54,12 @@ export type DrawerHistoryParamList = {
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
 
-export type CombinedScreenProps<T extends keyof RootStackParamList> = 
+
+export type HomeDrawerScreenProps<T extends keyof DrawerHistoryParamList> =
   CompositeScreenProps<
-      NativeStackScreenProps<AuthStackParamList>,
-      RootStackScreenProps<keyof RootStackParamList>
-    >
+    DrawerScreenProps<DrawerHistoryParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
 
 export type HomeTabScreenProps<T extends keyof BottomTabParamList> =
   CompositeScreenProps<

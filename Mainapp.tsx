@@ -24,6 +24,7 @@ import { getTasksFromFirestore } from './src/Database/FirestoreDB';
 import { navigationRef } from './src/navigation/NavigatioRef';
 import { getFCMToken, requestNotificationPermission } from './src/Services/Notification/FCMtoken';
 import { setupNotificationEvents } from './src/Services/Notification/LocalNotification/NotificationService';
+import { setupBackgroundNotificationListener, setupForegroundNotificationListener } from './src/Services/Notification/DisplayNotification';
 // import { setupForegroundNotificationListener, setupNotificationEvents } from './src/Services/Notification/LocalNotification/NotificationService';
 
 
@@ -94,7 +95,8 @@ function Mainapp() {
     if (!userID || listenersSet.current) return;
     requestNotificationPermission();
     getFCMToken(userID); 
-    // setupForegroundNotificationListener(); 
+    setupForegroundNotificationListener(); 
+    setupBackgroundNotificationListener();
     setupNotificationEvents(); 
     
     listenersSet.current = true;
@@ -112,6 +114,7 @@ function Mainapp() {
         
          {isLoggedIn ? (
           <AppNavigator />
+          // <DrawerNavigation /> 
           ) : (
           <AuthStack onLogin={() => setIsLoggedIn(true)} />
         )}

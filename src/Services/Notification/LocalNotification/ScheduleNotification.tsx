@@ -23,12 +23,28 @@ export const showImmediateNotification = async (task: Task) => {
 
 // Function to schedule a notification 30 minutes before the task time
 export const scheduleTaskReminder = async (task: Task) => {
+      const taskDate = new Date(task.date);  
       
-      const taskDate = new Date(task.date);  // Convert the task date string to a Date object
+      if (isNaN(taskDate.getTime())) {
+            console.error('Invalid date format', task.date);
+            Alert.alert("error date")
+            return;
+      }
+      
 
-      // Calculate the time 30 minutes before the task date
-      const reminderTime = new Date(taskDate.getTime() - 30 * 60 * 1000); // 30 minutes in milliseconds
+      console.log('Parsed Task Date:', taskDate);  // Log the parsed date
+
+
+      // Calculate the time 2 minutes before the task date
+      const reminderTime = new Date(taskDate.getTime() - 2 * 60 * 1000); // 30 minutes in milliseconds
       console.log('Calculated Reminder Time:', reminderTime);
+      // Check if reminder time is in the future
+      if (reminderTime.getTime() <= Date.now()) {
+            console.log('Reminder time is in the past.');
+            return;
+      }
+
+      console.log('Reminder scheduled at:', reminderTime);
 
       // Create a notification channel (for Android)
       await notifee.createChannel({

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { useAppSelector } from '../redux/hooks'
 import { Task } from '../navigation/types';
-import TaskList from './TaskList';
+import TaskList from '../screens/BottomTab/Home/components/TaskList';
 
 type FilteredTaskScreenProps = {
       navigation: any;

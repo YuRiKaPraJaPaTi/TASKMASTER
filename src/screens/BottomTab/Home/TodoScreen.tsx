@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, FlatList, Button} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import MyButton from '../../../components/MyButton';
-import TaskList from '../../../components/TaskList';
+import TaskList from './components/TaskList';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabParamList, HomeTabScreenProps, RootStackParamList, Task } from '../../../navigation/types';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
@@ -36,7 +36,7 @@ const TodoScreen = ({navigation, route}:HomeTabScreenProps<'Todo'>) => {
             <Text>To-do List</Text>
       </View>
       <View style={styles.bottom}>
-            <View >
+            <View>
                   <Text style={styles.heading}>My Tasks</Text>
                   <TaskList tasks={tasks} onPressDetails={handleDetails} 
                   />
