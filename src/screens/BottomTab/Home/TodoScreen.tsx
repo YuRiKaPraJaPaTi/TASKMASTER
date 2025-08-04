@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
 import { getTasksFromFirestore } from '../../../Database/FirestoreDB';
 import { setTasks } from '../../../redux/todoSlice';
 import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
+import TaskSummary from './components/TaskSummary';
 
 // type Props = BottomTabScreenProps<TodoScreenProps, 'Todo'>;
 
@@ -33,7 +34,8 @@ const TodoScreen = ({navigation, route}:HomeTabScreenProps<'Todo'>) => {
     <View style={styles.container}>
       
       <View style={styles.top}>
-            <Text>To-do List</Text>
+            <Text style={styles.topText}>To-do List</Text>
+            <TaskSummary />
       </View>
       <View style={styles.bottom}>
             <View>
@@ -67,6 +69,16 @@ const styles = StyleSheet.create({
       top: {
             flex:1,
             backgroundColor: '#4267B2',
+            paddingTop: 20,
+            paddingLeft: 20,
+            paddingRight: 20,
+            alignItems: 'center',
+      },
+      topText: {
+            color: 'white',
+            fontSize: 28,
+            fontWeight: 'bold',
+            marginBottom: 10,
       },
       bottom: {
             flex:2,
