@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
-import { createMaterialTopTabNavigator, MaterialTopTabBar } from '@react-navigation/material-top-tabs'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { TopHistoryTabParamList } from './types'
 import AllTaskScreen from '../screens/TopTab/AllTaskScreen'
 import ActiveTaskScreen from '../screens/TopTab/ActiveTaskScreen'

@@ -1,7 +1,6 @@
 import firestore from "@react-native-firebase/firestore";
 import { Task } from "../navigation/types";
 import { Alert } from "react-native";
-import notifee from '@notifee/react-native';
 import { scheduleTaskReminder, showImmediateNotification } from "../Services/Notification/LocalNotification/ScheduleNotification";
 
 

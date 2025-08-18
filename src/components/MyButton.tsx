@@ -1,6 +1,5 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Task } from '../navigation/types'
 
 type ButtonProps = {
       label: string;

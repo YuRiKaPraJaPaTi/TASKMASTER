@@ -1,7 +1,6 @@
 // screens/WelcomeScreen.tsx
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { Text, StyleSheet } from 'react-native';
 import { AuthStackParamList } from '../../navigation/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import MyImageBackground from '../../components/MyImageBackground';

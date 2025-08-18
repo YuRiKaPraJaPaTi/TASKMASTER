@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, SafeAreaView, Text, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert } from 'react-native';
 import { ActivityIndicator } from 'react-native';
 import InputText from '../../components/InputText';
-import SocialIcon from '../../components/SocialIcon';
 import  Icon  from 'react-native-vector-icons/FontAwesome';
 import { onGoogleButtonPress } from '../../Services/Google/GoogleSignInService';
 

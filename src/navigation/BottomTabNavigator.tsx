@@ -27,7 +27,7 @@ const BottomTabNavigator = () => {
                    headerStyle: {
                         backgroundColor: 'powderblue', // Change this to your desired color
                   },
-                  headerShown: false,
+                  headerShown: true,
                   headerLeft: () => (
                         <TouchableOpacity style={{ marginLeft: 15 }}>
                         <Image

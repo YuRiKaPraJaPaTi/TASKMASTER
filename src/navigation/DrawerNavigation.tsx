@@ -4,8 +4,8 @@ import AllTaskScreen from '../screens/TopTab/AllTaskScreen';
 import ActiveTaskScreen from '../screens/TopTab/ActiveTaskScreen';
 import CompletedTaskScreen from '../screens/TopTab/CompletedTaskScreen';
 import AppNavigator from './AppNavigatior';
-import { getFocusedRouteNameFromRoute, RouteProp } from '@react-navigation/native';
-import { NavigationState, Route } from '@react-navigation/native';
+import { RouteProp } from '@react-navigation/native';
+import { NavigationState } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator<DrawerHistoryParamList>();
 

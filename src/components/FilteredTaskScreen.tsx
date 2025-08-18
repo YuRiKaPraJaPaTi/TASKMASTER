@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { useAppSelector } from '../redux/hooks'
 import { Task } from '../navigation/types';
@@ -19,7 +19,7 @@ const FilteredTaskScreen = ({navigation, filterFunction}:FilteredTaskScreenProps
 
   return (
     <View>
-       <TaskList tasks={filteredTasks} onPressDetails={handlePressDetails} />
+       <TaskList tasks={filteredTasks} onPressDetails={()=>handlePressDetails} />
     </View>
   )
 }

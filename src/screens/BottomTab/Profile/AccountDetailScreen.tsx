@@ -1,7 +1,7 @@
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import auth from '@react-native-firebase/auth';
-import { fetchUserProfile, getUserProfile, saveUserProfile } from '../../../Database/FirestoreDB';
+import { fetchUserProfile, saveUserProfile } from '../../../Database/FirestoreDB';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const AccountDetailScreen = () => {
