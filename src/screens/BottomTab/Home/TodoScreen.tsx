@@ -9,6 +9,7 @@ import { getTasksFromFirestore } from '../../../Database/FirestoreDB';
 import { setTasks } from '../../../redux/todoSlice';
 import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 import TaskSummary from './components/TaskSummary';
+import DraggableAddButton from './components/AddButton';
 
 // type Props = BottomTabScreenProps<TodoScreenProps, 'Todo'>;
 
@@ -32,6 +33,7 @@ const TodoScreen = ({navigation, route}:HomeTabScreenProps<'Todo'>) => {
 
       return (
     <View style={styles.container}>
+      <DraggableAddButton onPress={handleAdd}/>
       
       <View style={styles.top}>
             <Text style={styles.topText}>To-do List</Text>
@@ -43,15 +45,7 @@ const TodoScreen = ({navigation, route}:HomeTabScreenProps<'Todo'>) => {
                   <TaskList tasks={tasks} onPressDetails={handleDetails} 
                   />
             </View>
-            <TouchableOpacity
-                  style={styles.fab}
-                  onPress={handleAdd}
-            >
-                  <Image 
-                        source={require('../../../../assets/plus.png')}
-                        style={styles.fabIcon}
-                  />
-            </TouchableOpacity>
+            
       </View>
     </View>
   )
