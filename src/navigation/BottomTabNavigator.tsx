@@ -25,7 +25,7 @@ const BottomTabNavigator = () => {
             component={TodoScreen} 
             options={{  headerTitle:'',tabBarLabel:'Home', title:'Home',
                    headerStyle: {
-                        backgroundColor: 'powderblue', // Change this to your desired color
+                        backgroundColor: '#4267B2', 
                   },
                   headerShown: true,
                   headerLeft: () => (

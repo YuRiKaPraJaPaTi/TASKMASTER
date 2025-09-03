@@ -2,7 +2,6 @@ import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
 import { CompositeScreenProps, NavigatorScreenParams } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import AuthStack from "./AuthStack";
 import { DrawerScreenProps } from "@react-navigation/drawer";
 
 export type Task = {

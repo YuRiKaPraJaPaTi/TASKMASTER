@@ -12,10 +12,7 @@ const TopHistoryTabNavigation = () => {
   return (
     <TopTab.Navigator
       screenOptions={{
-            // tabBarStyle: {backgroundColor: 'powderblue'},
-            // tabBarLabelStyle: {fontSize: 16}
-            // // tabBarItemStyle: {width:100}
-             tabBarStyle: styles.tabBar,
+        tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.tabLabel,
         tabBarIndicatorStyle: styles.tabIndicator,
         tabBarActiveTintColor: '#1E90FF',

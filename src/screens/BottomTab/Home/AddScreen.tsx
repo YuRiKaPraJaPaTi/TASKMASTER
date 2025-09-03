@@ -3,9 +3,9 @@ import React from 'react'
 import MyTextInput from '../../../components/MyTextInput'
 import MyButton from '../../../components/MyButton'
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList, Task } from '../../../navigation/types';
+import { RootStackParamList } from '../../../navigation/types';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
-import { addTask, clearForm, updateForm, editTask } from '../../../redux/todoSlice'
+import { clearForm, updateForm } from '../../../redux/todoSlice'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../redux/store'
 import { useEffect } from 'react';

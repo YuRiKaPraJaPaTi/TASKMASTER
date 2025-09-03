@@ -5,7 +5,6 @@ import { RootStackParamList, Task } from '../../../navigation/types';
 import SocialIcon from '../../../components/SocialIcon';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useAppDispatch, useAppSelector} from '../../../redux/hooks';
-import { deleteTask } from '../../../redux/todoSlice';
 import { deleteTaskFromFirestore } from '../../../Database/FirestoreDB';
 import auth from '@react-native-firebase/auth';
 

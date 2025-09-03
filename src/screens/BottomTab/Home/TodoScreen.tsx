@@ -1,13 +1,8 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, FlatList, Button} from 'react-native'
-import React, { useEffect, useState } from 'react'
-import MyButton from '../../../components/MyButton';
+import { StyleSheet, Text, View} from 'react-native'
+import React, {  } from 'react'
 import TaskList from './components/TaskList';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { BottomTabParamList, HomeTabScreenProps, RootStackParamList, Task } from '../../../navigation/types';
+import { HomeTabScreenProps } from '../../../navigation/types';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { getTasksFromFirestore } from '../../../Database/FirestoreDB';
-import { setTasks } from '../../../redux/todoSlice';
-import { getAuth, onAuthStateChanged } from '@react-native-firebase/auth';
 import TaskSummary from './components/TaskSummary';
 import DraggableAddButton from './components/AddButton';
 
