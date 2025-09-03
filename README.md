@@ -1,10 +1,70 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-# Getting Started
+# TaskMaster - React Native To-Do App
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+TaskMaster is a feature-rich **To-Do app** built with **React Native**. It allows users to manage their tasks efficiently with authentication, notifications, and a structured interface.
 
-## Step 1: Start Metro
+## Features
+
+### Authentication
+- Users can **sign up** and **log in** using **Firebase Authentication**.
+- Securely manages user sessions.
+
+### Home Tab
+- Shows a **basic summary** of tasks (total, completed, pending).
+- Displays tasks in a list format.
+- Includes a **draggable Add button** to create new tasks quickly.
+- Adding a task triggers a **notification** and a **2-minute scheduled reminder**.
+
+### History Tab
+- Displays **all tasks**, categorized as **Active** or **Completed**.
+- Allows users to review their task history.
+
+### Profile Tab
+- Shows **user profile details**.
+- Allows users to **logout**.
+
+### Task Features
+- Each task item allows:
+  - **View details**
+  - **Edit**
+  - **Delete**
+  - **Mark as done**
+- Actions update the task list immediately.
+
+### State Management & Storage
+- Uses **Redux** for global state management.
+- Uses **AsyncStorage** to persist tasks locally between sessions.
+
+### Notifications
+- Provides **instant notification** when a task is added.
+- Schedules a **reminder notification** 2 minutes ahead for pending tasks.
+
+## Technologies Used
+- **React Native**
+- **Firebase Authentication**
+- **Redux**
+- **AsyncStorage**
+- **React Native Push Notifications**
+
+## Getting Started
+
+### Clone the Repository
+```bash
+git clone https://github.com/YuRiKaPraJaPaTi/TASKMASTER.git
+cd TASKMASTER
+```
+
+### Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+
+
+### Start Metro
 
 First, you will need to run **Metro**, the JavaScript build tool for React Native.
 
@@ -18,9 +78,9 @@ npm start
 yarn start
 ```
 
-## Step 2: Build and run your app
+### Build and run app
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+With Metro running, open a new terminal window/pane from the root of the React Native project, and use one of the following commands to build and run your Android or iOS app:
 
 ### Android
 
@@ -32,50 +92,14 @@ npm run android
 yarn android
 ```
 
-### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
 
-```sh
-bundle install
-```
 
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
 
 ## Congratulations! :tada:
 
-You've successfully run and modified your React Native App. :partying_face:
+You've successfully run and modified React Native App. :partying_face:
 
 ### Now what?
 
