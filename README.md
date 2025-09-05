@@ -1,8 +1,11 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # TaskMaster - React Native To-Do App
-
 TaskMaster is a feature-rich **To-Do app** built with **React Native**. It allows users to manage their tasks efficiently with authentication, notifications, and a structured interface.
+
+![TaskMaster Logo](assets/overview/home.jpg) 
+
+📄 [Download the Project Overview PDF](assets/overview/taskmaster.pdf)
 
 ## Features
 
